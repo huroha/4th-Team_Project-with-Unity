@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GlobalDataControl : MonoBehaviour
 {
     public static GlobalDataControl Instance;
@@ -17,6 +17,11 @@ public class GlobalDataControl : MonoBehaviour
     public bool isGetBathRoomItem = false;
     public bool isGetInnerRoomItem = false;
     public bool isGetKitchenItem = false;
+    // UI 유지
+    public bool[] invActive = new bool[4];
+    public Sprite[] invImage = new Sprite[4];
+    public string[] invText = new string[4];
+
     void Awake()
     {
         // 게임 시작시 아이템 값 초기화(만약 후에 진행상황 저장기능이 필요하면 빼주어야함)
@@ -36,4 +41,5 @@ public class GlobalDataControl : MonoBehaviour
     {
         
     }
+    
 }

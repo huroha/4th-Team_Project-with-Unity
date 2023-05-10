@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Teleport : MonoBehaviour
 {
     Scene scene;
+    bool isSceneMoved = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,11 @@ public class Teleport : MonoBehaviour
         {
             SceneManager.LoadScene("BathRoom");
         }
+        isSceneMoved = true;
     }
 
+    public bool getSceneMoveCheck()
+    {
+        return isSceneMoved;
+    }
 }
