@@ -11,6 +11,10 @@ TagManager:
   - NoteArea
   - CorrectArea
   - isDuck
+  - Bed
+  - goal
+  - Safe
+  - isDoll
   layers:
   - Default
   - TransparentFX

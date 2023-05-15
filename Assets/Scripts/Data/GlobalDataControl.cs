@@ -18,6 +18,9 @@ public class GlobalDataControl : MonoBehaviour
     public bool isGetInnerRoomItem = false;
     public bool isGetKitchenItem = false;
     // UI À¯Áö
+    public int keyIndex = 0;
+    public int duckIndex = 0;
+    public int dollIndex = 0;
     public bool[] invActive = new bool[4];
     public Sprite[] invImage = new Sprite[4];
     public string[] invText = new string[4];

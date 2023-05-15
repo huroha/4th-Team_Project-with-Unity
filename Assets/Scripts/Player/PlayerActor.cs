@@ -137,7 +137,6 @@ public class PlayerActor : MonoBehaviour
             dir = isHorizontal ? new Vector2(collision.transform.position.x - rigid.transform.position.x, 0)
                 : new Vector2(0, (collision.transform.position.y - rigid.transform.position.y));
             // 플레이어가 바라보는 방향으로 벡터가 정해짐
-            Debug.Log("On Triggered.");
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

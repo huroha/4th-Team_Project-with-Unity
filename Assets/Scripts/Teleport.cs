@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 public class Teleport : MonoBehaviour
 {
     Scene scene;
-    bool isSceneMoved = false;
+    static bool isSceneMoved = false;
     // Start is called before the first frame update
     void Start()
     {
         scene = SceneManager.GetActiveScene();
+        if (scene.name != "startRoom")
+            isSceneMoved = true;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {              
+        Debug.Log("¾À ³Ñ¾î°¬³Ä? : " + getSceneMoveCheck());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,11 +29,14 @@ public class Teleport : MonoBehaviour
         {
             SceneManager.LoadScene("BathRoom");
         }
-        isSceneMoved = true;
     }
 
     public bool getSceneMoveCheck()
     {
         return isSceneMoved;
+    }
+    void changeIsSceneMoved()
+    {
+        isSceneMoved = true;
     }
 }
