@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Teleport : MonoBehaviour
 {
+    // test
     Scene scene;
     static bool isSceneMoved = false;
     // Start is called before the first frame update
