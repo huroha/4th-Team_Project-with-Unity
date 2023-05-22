@@ -7,6 +7,7 @@ public class Game_Manager : MonoBehaviour
 {
     public Talk_Manager talkManager;                        // 스크립트 참조
     public GameObject talkPanel;
+    public GameObject selectPanel;
     public Text talkText;
     public Image portraitImg;                   // 초상화
     public Quest_Manager questManager;
@@ -33,12 +34,13 @@ public class Game_Manager : MonoBehaviour
         {
             isAction = false;
             talkIndex = 0;
-            Debug.Log(questManager.CheckQuest(id));
+            questManager.CheckQuest(id);
             return;
         }
         if (isNpc)
         {
             talkText.text = talkData.Split(':')[0];
+
 
             portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
             portraitImg.color = new Color(1, 1, 1, 1);
@@ -47,6 +49,14 @@ public class Game_Manager : MonoBehaviour
         {
             talkText.text = talkData;
             portraitImg.color = new Color(1, 1, 1, 0);
+        }
+        if (talkData == "quest대화 확인2:1") // 대화 내용에 따라 조건을 변경.
+        {
+            selectPanel.SetActive(true);
+        }
+        else
+        {
+            selectPanel.SetActive(false);
         }
         isAction = true;
         talkIndex++;

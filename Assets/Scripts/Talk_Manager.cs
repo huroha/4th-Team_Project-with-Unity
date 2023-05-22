@@ -46,7 +46,7 @@ public class Talk_Manager : MonoBehaviour
         {
             if (!talkData.ContainsKey(id- id%10))
             {
-                // 퀘스트 맨 청므 대사마저 없을 때,
+                // 퀘스트 맨 처음 대사마저 없을 때,
                 // 기본 대사 가지고 옴
                 if (talkIndex == talkData[id - id % 100].Length)
                     return null;
