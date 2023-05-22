@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Game_Manager : MonoBehaviour
+{
+    public Talk_Manager talkManager;                        // 스크립트 참조
+    public GameObject talkPanel;
+    public Text talkText;
+    public Image portraitImg;                   // 초상화
+    public Quest_Manager questManager;
+    public GameObject scanObject;
+    public bool isAction;
+    public int talkIndex;
+    public void Action(GameObject scanObj)
+    {
+        isAction = true;
+        scanObject = scanObj;
+        ObjData objData = scanObject.GetComponent<ObjData>();
+        Talk(objData.id, objData.isNpc);
+
+        // 대화창 on off 처리
+        talkPanel.SetActive(isAction);
+    }
+    void Talk(int id, bool isNpc)
+    {
+        int questTalkIndex = questManager.GetQuestTalkIndex(id);
+
+        // 대화 data set
+        string talkData = talkManager.GetTalk(id+questTalkIndex, talkIndex);
+        if(talkData == null)
+        {
+            isAction = false;
+            talkIndex = 0;
+            Debug.Log(questManager.CheckQuest(id));
+            return;
+        }
+        if (isNpc)
+        {
+            talkText.text = talkData.Split(':')[0];
+
+            portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[1]));
+            portraitImg.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            talkText.text = talkData;
+            portraitImg.color = new Color(1, 1, 1, 0);
+        }
+        isAction = true;
+        talkIndex++;
+    }
+}

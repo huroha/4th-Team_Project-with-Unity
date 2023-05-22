@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerActor : MonoBehaviour
 {
+
+
     Rigidbody2D rigid;
 
     float h;
@@ -13,6 +15,9 @@ public class PlayerActor : MonoBehaviour
     bool isHorizontal;
 
     Animator anim;
+    //  대화 ui
+    public Game_Manager manager;
+
 
     // 기본적인 변수들
     // Slide
@@ -40,14 +45,14 @@ public class PlayerActor : MonoBehaviour
     void Update()
     {
         // Move Value
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        h = manager.isAction ? 0 : Input.GetAxisRaw("Horizontal");
+        v = manager.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
         // Check Button Down & Up
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-        bool hUp = Input.GetButtonUp("Horizontal");
-        bool vUp = Input.GetButtonUp("Vertical");
+        bool hDown = manager.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = manager.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = manager.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = manager.isAction ? false : Input.GetButtonUp("Vertical");
 
         // Check Horizontal Move
         if (hDown)
@@ -84,6 +89,8 @@ public class PlayerActor : MonoBehaviour
         //Scan Object
         if (Input.GetKeyDown(KeyCode.E) && scanObject != null)
         {
+            manager.Action(scanObject);
+
             if(scanObject.layer == 3) // 오브젝트 일 때
             {
                 myInv.setInventory(scanObject.tag); // 어떤 물체인지 정보를 넘겨서 그 아이템 개수를 증가시키기 위한 매개변수
