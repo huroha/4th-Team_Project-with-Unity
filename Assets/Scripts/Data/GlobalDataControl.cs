@@ -21,9 +21,10 @@ public class GlobalDataControl : MonoBehaviour
     public int keyIndex = 0;
     public int duckIndex = 0;
     public int dollIndex = 0;
-    public bool[] invActive = new bool[4];
-    public Sprite[] invImage = new Sprite[4];
-    public string[] invText = new string[4];
+    public int foodIndex = 0;
+    public bool[] invActive = new bool[5];
+    public Sprite[] invImage = new Sprite[5];
+    public string[] invText = new string[5];
 
     void Awake()
     {

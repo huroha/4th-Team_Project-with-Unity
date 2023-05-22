@@ -18,7 +18,6 @@ public class Teleport : MonoBehaviour
     // Update is called once per frame
     void Update()
     {              
-        Debug.Log("¾À ³Ñ¾î°¬³Ä? : " + getSceneMoveCheck());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

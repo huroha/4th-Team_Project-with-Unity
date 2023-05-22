@@ -7,19 +7,19 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     // 스프라이트 변경을 위한 변수
-    GameObject[] invArray = new GameObject[4];
-    public Image[] inventory = new Image[4];
+    GameObject[] invArray = new GameObject[5];
+    public Image[] inventory = new Image[5];
     PlayerActor player;
     // 인벤토리 UI 유지를 위한 변수
-    public bool[] isActive = new bool[4];
+    public bool[] isActive = new bool[5];
     Teleport myTp;
     // 인벤토리의 아이템 개수를 위한 변수
-    public Text[] myText = new Text[4];
-    public PlayerData myData;
+    public Text[] myText = new Text[5];
+    PlayerData myData;
     public int keyIndex;
     public int duckIndex;
     public int dollIndex;
-    public int kitchenIndex;
+    public int foodIndex;
     // 인벤토리 정렬을 위한 변수
     public bool isGetKey;
     public bool isGetBathRoomItem;
@@ -30,14 +30,15 @@ public class Inventory : MonoBehaviour
     {
         Debug.Log("============== 인벤토리 시작 ================");
         player = GameObject.Find("Player").GetComponent<PlayerActor>(); // 플레이어를 등록
-        myTp = GameObject.Find("TP").GetComponent<Teleport>();
+        myTp = GameObject.Find("Door").GetComponent<Teleport>();
+        myData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
         //myData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
         isGetKey = GlobalDataControl.Instance.isGetKey;
         isGetBathRoomItem = GlobalDataControl.Instance.isGetBathRoomItem;
         isGetInnerRoomItem = GlobalDataControl.Instance.isGetInnerRoomItem;
         isGetKitchenItem = GlobalDataControl.Instance.isGetKitchenItem;
 
-        for (int i = 0;i < 4;i++)
+        for (int i = 0;i < 5;i++)
         {
             // 인벤토리 각 칸 설정
             invArray[i] = transform.GetChild(i).gameObject; // 자식을 번호로 찾음
@@ -51,23 +52,26 @@ public class Inventory : MonoBehaviour
         savePlayerData();
         if (myTp.getSceneMoveCheck() == true)
         {
-            Debug.Log("여기서 동기화가 일어났을까?");
             // 활성화 여부 관리
             invArray[keyIndex].SetActive(GlobalDataControl.Instance.invActive[keyIndex]);
             invArray[duckIndex].SetActive(GlobalDataControl.Instance.invActive[duckIndex]);
             invArray[dollIndex].SetActive(GlobalDataControl.Instance.invActive[dollIndex]);
+            invArray[foodIndex].SetActive(GlobalDataControl.Instance.invActive[foodIndex]);
             // 이미지 관리
             inventory[keyIndex].sprite = GlobalDataControl.Instance.invImage[keyIndex];
             inventory[duckIndex].sprite = GlobalDataControl.Instance.invImage[duckIndex];
             inventory[dollIndex].sprite = GlobalDataControl.Instance.invImage[dollIndex];
+            inventory[foodIndex].sprite = GlobalDataControl.Instance.invImage[foodIndex];
             // 텍스트 관리
             myText[keyIndex].text = GlobalDataControl.Instance.invText[keyIndex];
             myText[duckIndex].text = GlobalDataControl.Instance.invText[duckIndex];
             myText[dollIndex].text = GlobalDataControl.Instance.invText[dollIndex];
+            myText[foodIndex].text = GlobalDataControl.Instance.invText[foodIndex];
             // 인덱스 관리
             keyIndex = GlobalDataControl.Instance.keyIndex;
             duckIndex = GlobalDataControl.Instance.duckIndex;
             dollIndex = GlobalDataControl.Instance.dollIndex;
+            foodIndex = GlobalDataControl.Instance.foodIndex;
         }
     }
 
@@ -80,8 +84,7 @@ public class Inventory : MonoBehaviour
             // 아이템을 검사해서 개수를 증가시켜주는 알고리즘
             switch (itemName)
             {
-                case "isKey": // key
-                    //Debug.Log("Key Add , " + myData.getKeyCount());
+                case "isKey": // key                  
                     myText[keyIndex].text = myData.getKeyCount().ToString(); // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
                     isGetKey = true;
                     if (myData.getKeyCount() < 3) // key 개수는 최대 3개
@@ -111,8 +114,15 @@ public class Inventory : MonoBehaviour
                         saveInvenText(dollIndex);
                     }
                     break;
-                case "food": // 주방 - 사료
-                    Debug.Log("food");
+                case "isFood": // 주방 - 사료
+                    myText[foodIndex].text = myData.getKrItemCount().ToString(); ; // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
+                    isGetKitchenItem = true;
+                    if (myData.getKrItemCount() < 1) // key 개수는 최대 3개
+                    {
+                        myData.addKrItemCount(); // key 개수 1 증가
+                        myText[foodIndex].text = myData.getKrItemCount().ToString();
+                        saveInvenText(foodIndex);
+                    }
 
                     break;
             }
@@ -122,24 +132,34 @@ public class Inventory : MonoBehaviour
     private void setInventorySprite(string itemName)
     {
         bool isConflict = false;
-        
-         if ((player.getScanOb().tag == "isKey" && isGetKey == true))
-         {
-            Debug.Log("----------------KEY 에 의해 중복 발생-----------------------");
-            isConflict = true;
-         }
-         else if((player.getScanOb().tag == "isDuck" && isGetBathRoomItem == true))
-         {
-            Debug.Log("----------------DUCK 에 의해 중복 발생----------------------");
-            isConflict = true;
-         }
-        else if ((player.getScanOb().tag == "isDoll" && isGetInnerRoomItem == true))
-         {
-            Debug.Log("----------------DOLL 에 의해 중복 발생----------------------");
-            isConflict = true;
-         }
+        if (player.getScanOb() != null)
+        {
+            if ((player.getScanOb().tag == "isKey" && isGetKey == true))
+            {
+                Debug.Log("----------------KEY 에 의해 중복 발생-----------------------");
+                isConflict = true;
+            }
+            else if ((player.getScanOb().tag == "isDuck" && isGetBathRoomItem == true))
+            {
+                Debug.Log("----------------DUCK 에 의해 중복 발생----------------------");
+                isConflict = true;
+            }
+            else if ((player.getScanOb().tag == "isDoll" && isGetInnerRoomItem == true))
+            {
+                Debug.Log("----------------DOLL 에 의해 중복 발생----------------------");
+                isConflict = true;
+            }
+        }
+        else
+        {
+            if(isGetKitchenItem == true)
+            {
+                Debug.Log("----------------FOOD 에 의해 중복 발생----------------------");
+                isConflict = true;
+            }
+        }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             // 만약 i번 인벤토리 칸이 active = false 일때 => 인벤토리 활성화 여부를 따져서 같은칸에 여러가지 아이템이 들어가는것을 방지
             // isConflict = false 일 때 => 중복을 체크해서 만약 똑같은 아이템이 인벤토리에 존재한다면 아이템을 넣지 않음
@@ -184,6 +204,19 @@ public class Inventory : MonoBehaviour
                     // 1차적으로 인벤토리에서의 위치가 정해짐
                     break;
                 }
+                else if (itemName == "isFood" && isGetKitchenItem == false)
+                {
+                    Debug.Log("-------------------FOOD false & false & false--------------------");
+                    invArray[i].SetActive(true);
+                    inventory[i].sprite = Resources.Load<Sprite>("Img_Food");
+                    Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                    foodIndex = i;
+                    saveInvenActive(foodIndex);
+                    saveInvenImage(foodIndex);
+                    saveInvenIndex(foodIndex, "food");
+                    // 1차적으로 인벤토리에서의 위치가 정해짐
+                    break;
+                }
 
             }
             
@@ -209,10 +242,18 @@ public class Inventory : MonoBehaviour
                 }
                 else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
                 {
-                    Debug.Log("-------------------DOLL false & false & false--------------------");
-                    invArray[i].SetActive(true);
-                    inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
-                    Debug.Log("Set inventory : " + inventory[i].sprite.name);     
+                    Debug.Log("-------------------DOLL false & true & true--------------------");
+                    invArray[dollIndex].SetActive(true);
+                    inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                    Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);     
+                    break;
+                }
+                else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
+                {
+                    Debug.Log("-------------------FOOD false & true & true--------------------");
+                    invArray[foodIndex].SetActive(true);
+                    inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
+                    Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
                     break;
                 }
             }
@@ -249,10 +290,19 @@ public class Inventory : MonoBehaviour
                     Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
                     break;
                 }
+                else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
+                {
+                    Debug.Log("-------------------FOOD false & true & true--------------------");
+                    invArray[foodIndex].SetActive(true);
+                    inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
+                    Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
+                    break;
+                }
             }
             
             // 0~7 까지 전부 중복되서 칸을 차지하지 않게끔
         }
+        Debug.Log(isConflict);
     }
     public void savePlayerData()
     {
@@ -290,6 +340,10 @@ public class Inventory : MonoBehaviour
         {
             GlobalDataControl.Instance.dollIndex = dollIndex;
         }
-        
+        else if (itemName == "food")
+        {
+            GlobalDataControl.Instance.foodIndex = foodIndex;
+        }
+
     }
 }

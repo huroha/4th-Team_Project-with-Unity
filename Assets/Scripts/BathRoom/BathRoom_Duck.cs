@@ -17,14 +17,18 @@ public class BathRoom_Duck : MonoBehaviour
     // 키 입력 순서를 체크하는 배열
     public char[] keyOrder = new char[4];
     public int indexCount = 0;
+    // 인벤
+    Inventory myInv;
+    bool isVailid;
     // Start is called before the first frame update
     void Start()
     {
         duckSource = GetComponent<AudioSource>();
         trackSource = GetComponent<AudioSource>();
-
+        myInv = GameObject.Find("Inventory").GetComponent<Inventory>();
         // 트랙 넘버 정하기(한판에 한번)
         trackNumber = Random.Range(0, 3);
+        isVailid = false;
     }
 
     // Update is called once per frame
@@ -38,7 +42,6 @@ public class BathRoom_Duck : MonoBehaviour
             duckSource.Play();
             if (indexCount < 4)
             {
-                Debug.Log("머임");
                 keyOrder[indexCount] = 'z';
                 indexCount += 1;
             }
@@ -80,19 +83,15 @@ public class BathRoom_Duck : MonoBehaviour
                 indexCount++;
             }
         }
-        orderCheck();
-        Debug.Log("배열 체크 : " + keyOrder + " 카운트 체크 : " + indexCount);
+        if (isVailid == false)
+            orderCheck();
     }
     public void selectTrack()
     {
-
-
         trackSource.clip = tracks[trackNumber];
         trackSource.loop = false;
         trackSource.mute = false;
         trackSource.Play();
-
-        Debug.Log("트랙실행");
     }
     
     void orderCheck()
@@ -100,18 +99,29 @@ public class BathRoom_Duck : MonoBehaviour
         if(trackNumber == 0)
         {
             if (keyOrder[0] == 'c' && keyOrder[1] == 'x' && keyOrder[2] == 'v' && keyOrder[3] == 'z')
+            {
                 Debug.Log("--------------------Correct Track Number 0 !!!------------------");
-                
+                myInv.setInventory("isFood");
+                isVailid = true;
+            }
         }
         else if(trackNumber == 1)
         {
             if (keyOrder[0] == 'x' && keyOrder[1] == 'v' && keyOrder[2] == 'c' && keyOrder[3] == 'z')
+            {
                 Debug.Log("--------------------Correct Track Number 1 !!!------------------");
+                myInv.setInventory("isFood");
+                isVailid = true;
+            }
         }
         else if(trackNumber == 2)
         {
             if (keyOrder[0] == 'c' && keyOrder[1] == 'v' && keyOrder[2] == 'z' && keyOrder[3] == 'x')
+            {
                 Debug.Log("--------------------Correct Track Number 2 !!!------------------");
+                myInv.setInventory("isFood");
+                isVailid = true;
+            }
         }
     }
 }

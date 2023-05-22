@@ -12,8 +12,7 @@ public class PlayerData : MonoBehaviour
     public int kitchenRoom_itemCount; // 사료
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {       
         // 게임 시작시 아이템 값 초기화(만약 후에 진행상황 저장기능이 필요하면 빼주어야함)
         keyCount = GlobalDataControl.Instance.keyCount;
         bathRoom_itemCount = GlobalDataControl.Instance.bathRoom_itemCount;

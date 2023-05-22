@@ -8,7 +8,6 @@ public class Cook : MonoBehaviour
     Rigidbody2D myNote;
     Vector2 noteInitPos;
     bool isTrigger = false;
-
     // Cook의 조리를 멈추는데 필요한 변수들
     public GameObject myInv;
     public GameObject myContainer;
@@ -59,6 +58,7 @@ public class Cook : MonoBehaviour
         {
             myInv.SetActive(true);
             myContainer.SetActive(false);
+            myInv.GetComponent<Inventory>().setInventory("isFood");
         }
     }
     
