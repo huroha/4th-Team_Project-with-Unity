@@ -25,6 +25,9 @@ public class GlobalDataControl : MonoBehaviour
     public bool[] invActive = new bool[5];
     public Sprite[] invImage = new Sprite[5];
     public string[] invText = new string[5];
+    // 오브젝트 관리
+    // 열쇠를 발견 했는지 여부 확인
+    public bool[] isUsed = new bool[3]; // 총 열쇠조각은 3개이므로 총 3곳의 오브젝트에서 발견되어야 함.
 
     void Awake()
     {

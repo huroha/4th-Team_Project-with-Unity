@@ -20,11 +20,9 @@ public class Cook : MonoBehaviour
     bool isCorOb2 = false;
     bool isCookOver = false;
     // Start is called before the first frame update
-    Text tempText;
     void Start()
     {
         myNote = GetComponent<Rigidbody2D>();
-        tempText = GameObject.Find("tempTxt").GetComponent<Text>();
         // 영역 체크를 위한 기본 설정
         for (int i = 0; i < correctAreaOb.Length; i++)
         {
@@ -84,51 +82,39 @@ public class Cook : MonoBehaviour
         {
             if (transform.localPosition.x >= rangePosStartX[0].x && transform.localPosition.x <= rangePosEndX[0].x)
             {
-                tempText.text = "첫번째 영역";
                 isCorOb1 = true;
             }
 
             else if (transform.localPosition.x >= rangePosStartX[1].x && transform.localPosition.x <= rangePosEndX[1].x)
-            { 
-                tempText.text = "두번째 영역";
+            {
                 isCorOb2 = true;
             }
-            else
-                tempText.text = "다른 영역";
         }
         else if (correctAreaOb[2].activeSelf == true && correctAreaOb[3].activeSelf == true)
         {
             if (transform.localPosition.x >= rangePosStartX[2].x && transform.localPosition.x <= rangePosEndX[2].x)
             {
-                tempText.text = "첫번째 영역";
                 isCorOb1 = true;
             }
             else if (transform.localPosition.x >= rangePosStartX[3].x && transform.localPosition.x <= rangePosEndX[3].x)
             {
-                tempText.text = "두번째 영역";
                 isCorOb2 = true;
             }
-            else
-                tempText.text = "다른 영역";
         }
         else if (correctAreaOb[4].activeSelf == true && correctAreaOb[5].activeSelf == true)
         {
             if (transform.localPosition.x >= rangePosStartX[4].x && transform.localPosition.x <= rangePosEndX[4].x)
             {
-                tempText.text = "첫번째 영역";
                 isCorOb1 = true;
             }
             else if (transform.localPosition.x >= rangePosStartX[5].x && transform.localPosition.x <= rangePosEndX[5].x)
             {
-                tempText.text = "두번째 영역";
                 isCorOb2 = true;
             }
-            else
-                tempText.text = "다른 영역";
+
             if (isCorOb1 == true && isCorOb2 == true)
                 isCookOver = true;
         }
-        Debug.Log("첫번째 영역은 : " + isCorOb1 + "두번째 영역은 : " + isCorOb2);
         changeTiming();
     }
     // 다른 영역으로 변경

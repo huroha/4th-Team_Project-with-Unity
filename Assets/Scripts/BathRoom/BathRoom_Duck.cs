@@ -84,7 +84,10 @@ public class BathRoom_Duck : MonoBehaviour
             }
         }
         if (isVailid == false)
+        {
             orderCheck();
+            initInputArray();
+        }
     }
     public void selectTrack()
     {
@@ -101,7 +104,7 @@ public class BathRoom_Duck : MonoBehaviour
             if (keyOrder[0] == 'c' && keyOrder[1] == 'x' && keyOrder[2] == 'v' && keyOrder[3] == 'z')
             {
                 Debug.Log("--------------------Correct Track Number 0 !!!------------------");
-                myInv.setInventory("isFood");
+                myInv.setInventory("isDuck");
                 isVailid = true;
             }
         }
@@ -110,7 +113,7 @@ public class BathRoom_Duck : MonoBehaviour
             if (keyOrder[0] == 'x' && keyOrder[1] == 'v' && keyOrder[2] == 'c' && keyOrder[3] == 'z')
             {
                 Debug.Log("--------------------Correct Track Number 1 !!!------------------");
-                myInv.setInventory("isFood");
+                myInv.setInventory("isDuck");
                 isVailid = true;
             }
         }
@@ -119,9 +122,21 @@ public class BathRoom_Duck : MonoBehaviour
             if (keyOrder[0] == 'c' && keyOrder[1] == 'v' && keyOrder[2] == 'z' && keyOrder[3] == 'x')
             {
                 Debug.Log("--------------------Correct Track Number 2 !!!------------------");
-                myInv.setInventory("isFood");
+                myInv.setInventory("isDuck");
                 isVailid = true;
             }
+        }
+    }
+
+    void initInputArray()
+    {
+        // 만약 플레이어가 입력한 순서가 틀렸을 경우 다시 배열을 초기화 시켜주는 과정
+        if ((keyOrder[0] != ' ' && keyOrder[1] != ' ' && 
+            keyOrder[2] != ' ' && keyOrder[3] != ' ') && isVailid == false)
+        {
+            for (int i = 0; i < 4; i++)
+                keyOrder[i] = ' ';
+            indexCount = 0;
         }
     }
 }

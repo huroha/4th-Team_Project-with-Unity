@@ -87,7 +87,7 @@ public class Inventory : MonoBehaviour
                 case "isKey": // key                  
                     myText[keyIndex].text = myData.getKeyCount().ToString(); // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
                     isGetKey = true;
-                    if (myData.getKeyCount() < 3) // key 개수는 최대 3개
+                    if (myData.getKeyCount() < 3 && player.getScanOb().GetComponent<ObjData>().getIsUsed() == false) // key 개수는 최대 3개
                     {         
                         myData.addKeyCount(); // key 개수 1 증가
                         myText[keyIndex].text = myData.getKeyCount().ToString();
@@ -139,11 +139,6 @@ public class Inventory : MonoBehaviour
                 Debug.Log("----------------KEY 에 의해 중복 발생-----------------------");
                 isConflict = true;
             }
-            else if ((player.getScanOb().tag == "isDuck" && isGetBathRoomItem == true))
-            {
-                Debug.Log("----------------DUCK 에 의해 중복 발생----------------------");
-                isConflict = true;
-            }
             else if ((player.getScanOb().tag == "isDoll" && isGetInnerRoomItem == true))
             {
                 Debug.Log("----------------DOLL 에 의해 중복 발생----------------------");
@@ -157,149 +152,291 @@ public class Inventory : MonoBehaviour
                 Debug.Log("----------------FOOD 에 의해 중복 발생----------------------");
                 isConflict = true;
             }
+            else if (isGetBathRoomItem == true)
+            {
+                Debug.Log("----------------DUCK 에 의해 중복 발생----------------------");
+                isConflict = true;
+            }
         }
 
         for (int i = 0; i < 5; i++)
         {
             // 만약 i번 인벤토리 칸이 active = false 일때 => 인벤토리 활성화 여부를 따져서 같은칸에 여러가지 아이템이 들어가는것을 방지
             // isConflict = false 일 때 => 중복을 체크해서 만약 똑같은 아이템이 인벤토리에 존재한다면 아이템을 넣지 않음
-            if (invArray[i].activeInHierarchy == false && isConflict == false)
+            if (player.getScanOb() != null)
             {
-                if (itemName == "isKey" && isGetKey == false)
+                if (invArray[i].activeInHierarchy == false && isConflict == false)
                 {
-                    Debug.Log("-------------------KEY false & false & false--------------------");
-                    invArray[i].SetActive(true);
-                    inventory[i].sprite = Resources.Load<Sprite>("Img_Key");
-                    Debug.Log("Set inventory : " + inventory[i].sprite.name);
-                    keyIndex = i;
-                    saveInvenActive(keyIndex);
-                    saveInvenImage(keyIndex);
-                    saveInvenIndex(keyIndex, "key");
-                    // 1차적으로 인벤토리에서의 위치가 정해짐
-                    break;
+                    if (itemName == "isKey" && isGetKey == false)
+                    {
+                        Debug.Log("-------------------KEY false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Key");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        keyIndex = i;
+                        saveInvenActive(keyIndex);
+                        saveInvenImage(keyIndex);
+                        saveInvenIndex(keyIndex, "key");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isDuck" && isGetKitchenItem == false)
+                    {
+                        Debug.Log("-------------------DUCK false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Duck");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        duckIndex = i;
+                        saveInvenActive(duckIndex);
+                        saveInvenImage(duckIndex);
+                        saveInvenIndex(duckIndex, "duck");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == false)
+                    {
+                        Debug.Log("-------------------DOLL false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        dollIndex = i;
+                        saveInvenActive(dollIndex);
+                        saveInvenImage(dollIndex);
+                        saveInvenIndex(dollIndex, "doll");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isFood" && isGetKitchenItem == false)
+                    {
+                        Debug.Log("-------------------FOOD false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Food");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        foodIndex = i;
+                        saveInvenActive(foodIndex);
+                        saveInvenImage(foodIndex);
+                        saveInvenIndex(foodIndex, "food");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
                 }
-                else if(itemName == "isDuck" && isGetKitchenItem == false)
+                // 씬 전환 했을때의 경우
+                // 여기부턴 아이템이 인벤토리에 존재한다는 가정으로 진행됨.
+                else if (invArray[i].activeInHierarchy == false && isConflict == true)
                 {
-                    Debug.Log("-------------------DUCK false & false & false--------------------");
-                    invArray[i].SetActive(true);
-                    inventory[i].sprite = Resources.Load<Sprite>("Img_Duck");
-                    Debug.Log("Set inventory : " + inventory[i].sprite.name);
-                    duckIndex = i;
-                    saveInvenActive(duckIndex);
-                    saveInvenImage(duckIndex);
-                    saveInvenIndex(duckIndex, "duck");
-                    // 1차적으로 인벤토리에서의 위치가 정해짐
-                    break;
-                }
-                else if (itemName == "isDoll" && isGetInnerRoomItem == false)
-                {
-                    Debug.Log("-------------------DOLL false & false & false--------------------");
-                    invArray[i].SetActive(true);
-                    inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
-                    Debug.Log("Set inventory : " + inventory[i].sprite.name);
-                    dollIndex = i;
-                    saveInvenActive(dollIndex);
-                    saveInvenImage(dollIndex);
-                    saveInvenIndex(dollIndex, "doll");
-                    // 1차적으로 인벤토리에서의 위치가 정해짐
-                    break;
-                }
-                else if (itemName == "isFood" && isGetKitchenItem == false)
-                {
-                    Debug.Log("-------------------FOOD false & false & false--------------------");
-                    invArray[i].SetActive(true);
-                    inventory[i].sprite = Resources.Load<Sprite>("Img_Food");
-                    Debug.Log("Set inventory : " + inventory[i].sprite.name);
-                    foodIndex = i;
-                    saveInvenActive(foodIndex);
-                    saveInvenImage(foodIndex);
-                    saveInvenIndex(foodIndex, "food");
-                    // 1차적으로 인벤토리에서의 위치가 정해짐
-                    break;
+                    if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
+                    {
+                        Debug.Log("-------------------KEY false & true & true--------------------");
+                        invArray[keyIndex].SetActive(true);
+                        inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
+                        Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[duckIndex].sprite.name == "Img_Duck")
+                    {
+                        Debug.Log("-------------------DUCK false & true & true--------------------");
+                        invArray[duckIndex].SetActive(true);
+                        inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
+                        Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
+                    {
+                        Debug.Log("-------------------DOLL false & true & true--------------------");
+                        invArray[dollIndex].SetActive(true);
+                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
+                    {
+                        Debug.Log("-------------------FOOD false & true & true--------------------");
+                        invArray[foodIndex].SetActive(true);
+                        inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
+                        Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
+                        break;
+                    }
                 }
 
-            }
-            
-            // 씬 전환 했을때의 경우
-            // 여기부턴 아이템이 인벤토리에 존재한다는 가정으로 진행됨.
-            else if (invArray[i].activeInHierarchy == false && isConflict == true)
-            {
-                if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
+                else if (invArray[i].activeInHierarchy == true && isConflict == true)
                 {
-                    Debug.Log("-------------------KEY false & true & true--------------------");
-                    invArray[keyIndex].SetActive(true);
-                    inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
-                    Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
-                    break;
-                }
-                else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[duckIndex].sprite.name == "Img_Duck")
-                {
-                    Debug.Log("-------------------DUCK false & true & true--------------------");
-                    invArray[duckIndex].SetActive(true);
-                    inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
-                    Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
-                    break;
-                }
-                else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
-                {
-                    Debug.Log("-------------------DOLL false & true & true--------------------");
-                    invArray[dollIndex].SetActive(true);
-                    inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
-                    Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);     
-                    break;
-                }
-                else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
-                {
-                    Debug.Log("-------------------FOOD false & true & true--------------------");
-                    invArray[foodIndex].SetActive(true);
-                    inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
-                    Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
-                    break;
-                }
-            }
+                    /*
+                    Debug.Log("엑티브에 충돌");
+                    Debug.Log("자 i 는 : " + i + "이고 태그는 : " + 
+                        itemName + "이고 스프라이트 이름은 : " + inventory[i].sprite.name + "이야");*/
 
-            else if (invArray[i].activeInHierarchy == true && isConflict == true)
-            {
-                /*
-                Debug.Log("엑티브에 충돌");
-                Debug.Log("자 i 는 : " + i + "이고 태그는 : " + 
-                    itemName + "이고 스프라이트 이름은 : " + inventory[i].sprite.name + "이야");*/
-
-                // 스프라이트 이름까지 체크해주어야 순서가 뒤바뀌어도 정상적으로 작동함
-                if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
-                {
-                    Debug.Log("-------------------KEY true & true & true--------------------");
-                    invArray[keyIndex].SetActive(true);
-                    inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
-                    Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
-                    break;
-                }
-                else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[i].sprite.name == "Img_Duck")
-                {
-                    Debug.Log("-------------------DUCK true & true & true--------------------");
-                    invArray[duckIndex].SetActive(true);
-                    inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
-                    Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
-                    break;
-                }
-                else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
-                {
-                    Debug.Log("-------------------DOLL true & true & true--------------------");
-                    invArray[dollIndex].SetActive(true);
-                    inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
-                    Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
-                    break;
-                }
-                else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
-                {
-                    Debug.Log("-------------------FOOD false & true & true--------------------");
-                    invArray[foodIndex].SetActive(true);
-                    inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
-                    Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
-                    break;
+                    // 스프라이트 이름까지 체크해주어야 순서가 뒤바뀌어도 정상적으로 작동함
+                    if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
+                    {
+                        Debug.Log("-------------------KEY true & true & true--------------------");
+                        invArray[keyIndex].SetActive(true);
+                        inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
+                        Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[i].sprite.name == "Img_Duck")
+                    {
+                        Debug.Log("-------------------DUCK true & true & true--------------------");
+                        invArray[duckIndex].SetActive(true);
+                        inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
+                        Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
+                    {
+                        Debug.Log("-------------------DOLL true & true & true--------------------");
+                        invArray[dollIndex].SetActive(true);
+                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
+                    {
+                        Debug.Log("-------------------FOOD false & true & true--------------------");
+                        invArray[foodIndex].SetActive(true);
+                        inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
+                        Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
+                        break;
+                    }
                 }
             }
-            
+            else if (player.getScanOb() == null)
+            {
+                if (invArray[i].activeInHierarchy == false && isConflict == false)
+                {
+                    if (itemName == "isKey" && isGetKey == false)
+                    {
+                        Debug.Log("-------------------KEY false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Key");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        keyIndex = i;
+                        saveInvenActive(keyIndex);
+                        saveInvenImage(keyIndex);
+                        saveInvenIndex(keyIndex, "key");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isDuck" && isGetKitchenItem == false)
+                    {
+                        Debug.Log("-------------------DUCK false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Duck");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        duckIndex = i;
+                        saveInvenActive(duckIndex);
+                        saveInvenImage(duckIndex);
+                        saveInvenIndex(duckIndex, "duck");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == false)
+                    {
+                        Debug.Log("-------------------DOLL false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        dollIndex = i;
+                        saveInvenActive(dollIndex);
+                        saveInvenImage(dollIndex);
+                        saveInvenIndex(dollIndex, "doll");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isFood" && isGetKitchenItem == false)
+                    {
+                        Debug.Log("-------------------FOOD false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Food");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        foodIndex = i;
+                        saveInvenActive(foodIndex);
+                        saveInvenImage(foodIndex);
+                        saveInvenIndex(foodIndex, "food");
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                }
+                // 씬 전환 했을때의 경우
+                // 여기부턴 아이템이 인벤토리에 존재한다는 가정으로 진행됨.
+                else if (invArray[i].activeInHierarchy == false && isConflict == true)
+                {
+                    if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
+                    {
+                        Debug.Log("-------------------KEY false & true & true--------------------");
+                        invArray[keyIndex].SetActive(true);
+                        inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
+                        Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[duckIndex].sprite.name == "Img_Duck")
+                    {
+                        Debug.Log("-------------------DUCK false & true & true--------------------");
+                        invArray[duckIndex].SetActive(true);
+                        inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
+                        Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
+                    {
+                        Debug.Log("-------------------DOLL false & true & true--------------------");
+                        invArray[dollIndex].SetActive(true);
+                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
+                    {
+                        Debug.Log("-------------------FOOD false & true & true--------------------");
+                        invArray[foodIndex].SetActive(true);
+                        inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
+                        Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
+                        break;
+                    }
+                }
+
+                else if (invArray[i].activeInHierarchy == true && isConflict == true)
+                {
+                    /*
+                    Debug.Log("엑티브에 충돌");
+                    Debug.Log("자 i 는 : " + i + "이고 태그는 : " + 
+                        itemName + "이고 스프라이트 이름은 : " + inventory[i].sprite.name + "이야");*/
+
+                    // 스프라이트 이름까지 체크해주어야 순서가 뒤바뀌어도 정상적으로 작동함
+                    if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
+                    {
+                        Debug.Log("-------------------KEY true & true & true--------------------");
+                        invArray[keyIndex].SetActive(true);
+                        inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
+                        Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[i].sprite.name == "Img_Duck")
+                    {
+                        Debug.Log("-------------------DUCK true & true & true--------------------");
+                        invArray[duckIndex].SetActive(true);
+                        inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
+                        Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
+                    {
+                        Debug.Log("-------------------DOLL true & true & true--------------------");
+                        invArray[dollIndex].SetActive(true);
+                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
+                        break;
+                    }
+                    else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
+                    {
+                        Debug.Log("-------------------FOOD false & true & true--------------------");
+                        invArray[foodIndex].SetActive(true);
+                        inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
+                        Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
+                        break;
+                    }
+                }
+            }
             // 0~7 까지 전부 중복되서 칸을 차지하지 않게끔
         }
         Debug.Log(isConflict);

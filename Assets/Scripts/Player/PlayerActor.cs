@@ -40,6 +40,8 @@ public class PlayerActor : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
+    // 오브젝트 사용 여부
+    public bool isUsed = false;
 
     // Update is called once per frame
     void Update()
@@ -94,6 +96,7 @@ public class PlayerActor : MonoBehaviour
             if(scanObject.layer == 3) // 오브젝트 일 때
             {
                 myInv.setInventory(scanObject.tag); // 어떤 물체인지 정보를 넘겨서 그 아이템 개수를 증가시키기 위한 매개변수
+                scanObject.GetComponent<ObjData>().setIsUsed();
                 Debug.Log("set Inven");
                 // key++; key 값을 높여줘야함 그래야 나중에 문을 열 때 개수로 판단
             }
@@ -169,5 +172,4 @@ public class PlayerActor : MonoBehaviour
     {
         return scanObject;
     }
-
 }

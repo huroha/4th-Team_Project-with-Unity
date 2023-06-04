@@ -24,6 +24,10 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(1000, new string[] { "1번째 대사:1", "2번째 대사:2" });
         talkData.Add(2000, new string[] { "1번째 대사:0", "2번째 대사:1" });
         talkData.Add(100, new string[] { "carpet" });
+        talkData.Add(200, new string[] { "key1" });
+        talkData.Add(300, new string[] { "key2" });
+        talkData.Add(400, new string[] { "num3" });
+        talkData.Add(500, new string[] { "num4" });
 
         // quest data
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
