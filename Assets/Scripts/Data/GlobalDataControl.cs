@@ -32,7 +32,6 @@ public class GlobalDataControl : MonoBehaviour
     void Awake()
     {
         // 게임 시작시 아이템 값 초기화(만약 후에 진행상황 저장기능이 필요하면 빼주어야함)
-
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);

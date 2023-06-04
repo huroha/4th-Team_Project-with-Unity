@@ -40,6 +40,7 @@ public class Cook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!isTrigger)
         {
             myNote.transform.Translate(new Vector3(noteSpeed * Time.deltaTime, 0f, 0f));

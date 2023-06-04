@@ -14,7 +14,7 @@ public class Teleport : MonoBehaviour
         if (scene.name != "startRoom")
             isSceneMoved = true;
     }
-
+    
     // Update is called once per frame
     void Update()
     {              
