@@ -5963,6 +5963,7 @@ MonoBehaviour:
   inven: {fileID: 1893323243}
   myInv: {fileID: 1893323245}
   myCook: {fileID: 0}
+  isUsed: 0
 --- !u!95 &1918946948
 Animator:
   serializedVersion: 5

@@ -23,6 +23,7 @@ public class Talk_Manager : MonoBehaviour
 
         talkData.Add(1000, new string[] { "1번째 대사:1", "2번째 대사:2" });
         talkData.Add(2000, new string[] { "1번째 대사:0", "2번째 대사:1" });
+
         talkData.Add(100, new string[] { "carpet" });
         talkData.Add(200, new string[] { "key1" });
         talkData.Add(300, new string[] { "key2" });
@@ -33,6 +34,8 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
 
         talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
+        talkData.Add(30 + 2000, new string[] { "선택지성공1:0", "선택지성공2:1" });
+        talkData.Add(100 + 2000, new string[] { "다시 시도quest대화 확인1:0", "다시 시도quest대화 확인2:1" });
         // 초상화 data
         portraitData.Add(1000 + 0,portraitArr[0]);
         portraitData.Add(1000 + 1, portraitArr[1]);

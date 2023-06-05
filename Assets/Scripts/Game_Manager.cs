@@ -29,7 +29,7 @@ public class Game_Manager : MonoBehaviour
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
 
         // 대화 data set
-        string talkData = talkManager.GetTalk(id+questTalkIndex, talkIndex);
+        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
         if(talkData == null)
         {
             isAction = false;
@@ -50,7 +50,7 @@ public class Game_Manager : MonoBehaviour
             talkText.text = talkData;
             portraitImg.color = new Color(1, 1, 1, 0);
         }
-        if (talkData == "quest대화 확인2:1") // 대화 내용에 따라 조건을 변경.
+        if (talkData == "quest대화 확인2:1" || talkData == "다시 시도quest대화 확인2:1") // 대화 내용에 따라 조건을 변경.
         {
             selectPanel.SetActive(true);
         }

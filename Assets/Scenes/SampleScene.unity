@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1000
   isNpc: 1
+  isUsed: 0
 --- !u!212 &274909911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2072,6 +2073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 100
   isNpc: 0
+  isUsed: 0
 --- !u!61 &807702085
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2411,6 +2413,7 @@ MonoBehaviour:
   inven: {fileID: 1005337844}
   myInv: {fileID: 1005337845}
   myCook: {fileID: 1031323910}
+  isUsed: 0
 --- !u!50 &1003193042
 Rigidbody2D:
   serializedVersion: 4
@@ -2585,11 +2588,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  myData: {fileID: 1482235944}
   keyIndex: 0
   duckIndex: 0
   dollIndex: 0
-  kitchenIndex: 0
+  foodIndex: 0
   isGetKey: 0
   isGetBathRoomItem: 0
   isGetInnerRoomItem: 0
@@ -5069,7 +5071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 27
+  m_AssetsPPU: 36
   m_RefResolutionX: 320
   m_RefResolutionY: 180
   m_UpscaleRT: 0
@@ -5108,11 +5110,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 48.5
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6983,6 +6985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2000
   isNpc: 1
+  isUsed: 0
 --- !u!212 &2077996877
 SpriteRenderer:
   m_ObjectHideFlags: 0

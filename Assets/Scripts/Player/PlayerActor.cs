@@ -18,6 +18,8 @@ public class PlayerActor : MonoBehaviour
     //  대화 ui
     public Game_Manager manager;
 
+    public static PlayerActor instance;
+
 
     // 기본적인 변수들
     // Slide
@@ -35,6 +37,14 @@ public class PlayerActor : MonoBehaviour
 
     // Cook
     public GameObject myCook;
+
+    private void Awake()
+    {
+        if(PlayerActor.instance == null)
+        {
+            PlayerActor.instance = this;
+        }
+    }
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -91,7 +101,8 @@ public class PlayerActor : MonoBehaviour
         //Scan Object
         if (Input.GetKeyDown(KeyCode.E) && scanObject != null)
         {
-            manager.Action(scanObject);
+            //manager.Action(scanObject);
+            PressEKey();
 
             if(scanObject.layer == 3) // 오브젝트 일 때
             {
@@ -164,6 +175,7 @@ public class PlayerActor : MonoBehaviour
         rigid.AddForce(sliding);
     }
     void StopSliding()
+
     {
         CancelInvoke("OnSliding");
     }
@@ -171,5 +183,10 @@ public class PlayerActor : MonoBehaviour
     public GameObject getScanOb()
     {
         return scanObject;
+    }
+
+    public void PressEKey()
+    {
+        manager.Action(scanObject);
     }
 }
