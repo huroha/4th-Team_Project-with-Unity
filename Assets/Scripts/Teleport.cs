@@ -7,6 +7,7 @@ public class Teleport : MonoBehaviour
     // test
     Scene scene;
     static bool isSceneMoved = false;
+    public string SceneName;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +18,16 @@ public class Teleport : MonoBehaviour
     
     // Update is called once per frame
     void Update()
-    {              
+    {
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (scene.name == "BathRoom")
+        if (SceneName == "LivingRoom")
         { 
-            SceneManager.LoadScene("Kitchen"); 
+            SceneManager.LoadScene("Kitchen&LivingRoom"); 
         }
-        else if(scene.name == "Kitchen")
+        else if(SceneName == "BathRoom")
         {
             SceneManager.LoadScene("BathRoom");
         }

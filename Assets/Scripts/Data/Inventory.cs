@@ -30,9 +30,8 @@ public class Inventory : MonoBehaviour
     {
         Debug.Log("============== 인벤토리 시작 ================");
         player = GameObject.Find("Player").GetComponent<PlayerActor>(); // 플레이어를 등록
-        myTp = GameObject.Find("Door").GetComponent<Teleport>();
+        //myTp = GameObject.Find("Door").GetComponent<Teleport>();
         myData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
-        //myData = GameObject.Find("PlayerData").GetComponent<PlayerData>();
         isGetKey = GlobalDataControl.Instance.isGetKey;
         isGetBathRoomItem = GlobalDataControl.Instance.isGetBathRoomItem;
         isGetInnerRoomItem = GlobalDataControl.Instance.isGetInnerRoomItem;
@@ -50,6 +49,27 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         savePlayerData();
+            // 활성화 여부 관리
+            invArray[keyIndex].SetActive(GlobalDataControl.Instance.invActive[keyIndex]);
+            invArray[duckIndex].SetActive(GlobalDataControl.Instance.invActive[duckIndex]);
+            invArray[dollIndex].SetActive(GlobalDataControl.Instance.invActive[dollIndex]);
+            invArray[foodIndex].SetActive(GlobalDataControl.Instance.invActive[foodIndex]);
+            // 이미지 관리
+            inventory[keyIndex].sprite = GlobalDataControl.Instance.invImage[keyIndex];
+            inventory[duckIndex].sprite = GlobalDataControl.Instance.invImage[duckIndex];
+            inventory[dollIndex].sprite = GlobalDataControl.Instance.invImage[dollIndex];
+            inventory[foodIndex].sprite = GlobalDataControl.Instance.invImage[foodIndex];
+            // 텍스트 관리
+            myText[keyIndex].text = GlobalDataControl.Instance.invText[keyIndex];
+            myText[duckIndex].text = GlobalDataControl.Instance.invText[duckIndex];
+            myText[dollIndex].text = GlobalDataControl.Instance.invText[dollIndex];
+            myText[foodIndex].text = GlobalDataControl.Instance.invText[foodIndex];
+            // 인덱스 관리
+            keyIndex = GlobalDataControl.Instance.keyIndex;
+            duckIndex = GlobalDataControl.Instance.duckIndex;
+            dollIndex = GlobalDataControl.Instance.dollIndex;
+            foodIndex = GlobalDataControl.Instance.foodIndex;
+        /*
         if (myTp.getSceneMoveCheck() == true)
         {
             // 활성화 여부 관리
@@ -73,6 +93,7 @@ public class Inventory : MonoBehaviour
             dollIndex = GlobalDataControl.Instance.dollIndex;
             foodIndex = GlobalDataControl.Instance.foodIndex;
         }
+        */
     }
 
     // Inventory System (만약 sprite가 같은게 있다면 추가를 하지 않음)
