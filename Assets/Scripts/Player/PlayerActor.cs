@@ -118,7 +118,7 @@ public class PlayerActor : MonoBehaviour
             }
         }
     }
-
+    
     private void FixedUpdate()
     {
         // Move
