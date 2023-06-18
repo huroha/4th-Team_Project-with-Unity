@@ -160,6 +160,16 @@ public class PlayerActor : MonoBehaviour
             // 플레이어가 바라보는 방향으로 벡터가 정해짐
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "SlidingTile")
+        {
+            isSlide = true;
+            dir = isHorizontal ? new Vector2(rigid.transform.position.x - collision.transform.position.x, 0)
+                : new Vector2(0, (rigid.transform.position.y - collision.transform.position.y));
+            // 플레이어가 바라보는 방향으로 벡터가 정해짐 , 나가는 방향이니까 여기선 반대로
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(isSlide)
