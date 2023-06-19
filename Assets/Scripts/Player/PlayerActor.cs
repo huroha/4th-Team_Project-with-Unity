@@ -23,10 +23,11 @@ public class PlayerActor : MonoBehaviour
 
     // 기본적인 변수들
     // Slide
-    bool isSlide = false;
+    public bool isSlide = false;
     Vector2 sliding;
     Vector2 dir;
     public float slidingSpeed = 300f;
+    bool isFirstSliding = false;
     // Scan
     Vector3 dirVec;
     GameObject scanObject;
@@ -117,6 +118,7 @@ public class PlayerActor : MonoBehaviour
                 myCook.SetActive(true);
             }
         }
+        Debug.Log(isSlide);
     }
     
     private void FixedUpdate()
@@ -149,26 +151,53 @@ public class PlayerActor : MonoBehaviour
         else
             scanObject = null;
     }
-
+    // 슬라이딩 관련 , (왼,아래) = 마이너스 , (오,위) = 플러스
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "SlidingTile")
+        if (collision.gameObject.tag == "SlidingTile" && isFirstSliding == false)
         {
             isSlide = true;
             dir = isHorizontal ? new Vector2(collision.transform.position.x - rigid.transform.position.x, 0)
                 : new Vector2(0, (collision.transform.position.y - rigid.transform.position.y));
-            // 플레이어가 바라보는 방향으로 벡터가 정해짐
+            isFirstSliding = true;
+            // 플레이어가 바라보는 방향으로 벡터가 정해짐 , 만약 플레이어가 key를 유지하지 않을 시 세로 움직임
         }
+        
     }
+    */
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "SlidingTile")
         {
             isSlide = true;
+            /*
             dir = isHorizontal ? new Vector2(rigid.transform.position.x - collision.transform.position.x, 0)
                 : new Vector2(0, (rigid.transform.position.y - collision.transform.position.y));
+            */
+            if (h < 0) // 좌
+            {
+                dir = Vector2.left;
+            }
+            else if(h > 0) // 우
+            {
+                dir = Vector2.right;
+
+            }
+            else if(v < 0) // 하
+            {
+                dir = Vector2.down;
+            }
+            else if(v > 0) // 상
+            {
+                dir = Vector2.up;
+            }
+            
+            
+            Debug.Log(dir);
             // 플레이어가 바라보는 방향으로 벡터가 정해짐 , 나가는 방향이니까 여기선 반대로
         }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -176,9 +205,9 @@ public class PlayerActor : MonoBehaviour
         {
             isSlide = false;
             StopSliding();
+            Debug.Log("뭔데 시발");
         }
     }
-
     void OnSliding()
     {
         sliding = dir * slidingSpeed;
