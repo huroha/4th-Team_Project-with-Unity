@@ -118,7 +118,6 @@ public class PlayerActor : MonoBehaviour
                 myCook.SetActive(true);
             }
         }
-        Debug.Log(isSlide);
     }
     
     private void FixedUpdate()

@@ -31,6 +31,18 @@ public class Teleport : MonoBehaviour
         {
             SceneManager.LoadScene("BathRoom");
         }
+        else if (SceneName == "InnerRoom")
+        {
+            SceneManager.LoadScene("InnerRoom");
+        }
+        else if (SceneName == "Entrance")
+        {
+            SceneManager.LoadScene("Entrance");
+        }
+        else if (SceneName == "Yard")
+        {
+            SceneManager.LoadScene("Yard");
+        }
     }
 
     public bool getSceneMoveCheck()
