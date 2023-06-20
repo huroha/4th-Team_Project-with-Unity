@@ -21,7 +21,7 @@ public class Bed_Event : MonoBehaviour
 
     void Update()
     {
-        if (!routinecheck && Input.GetKeyDown(KeyCode.E))       // E 키 and 한번만 실행되도록 설정
+        if (!routinecheck && Input.GetKeyDown(KeyCode.K))       // E 키 and 한번만 실행되도록 설정
         {
             StartCoroutine(ActivateObjects());
         }
