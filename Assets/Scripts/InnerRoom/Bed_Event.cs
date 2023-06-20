@@ -5,9 +5,11 @@ using UnityEngine;
 public class Bed_Event : MonoBehaviour
 {
     public GameObject[] objects;
-    public int timeInterval = 1;                       
-    private int currentIndex = 0;                          
-    private bool routinecheck = false;                   
+    public float inactiveDuration = 0.5f;
+    public float activeDuration = 1f;
+    public int coroutineCount = 3;
+    private int currentIndex = 0;
+    private bool routinecheck = false;
 
     void Start()
     {
@@ -28,27 +30,22 @@ public class Bed_Event : MonoBehaviour
     IEnumerator ActivateObjects()
     {
         routinecheck = true;
-        objects[currentIndex].SetActive(true);
-        currentIndex++;
 
-        if (currentIndex >= objects.Length)
+        for (int i = 0; i < coroutineCount; i++)
         {
-            currentIndex = 0;
+            objects[currentIndex].SetActive(true);
+            yield return new WaitForSeconds(activeDuration);
+            objects[currentIndex].SetActive(false);
+            currentIndex++;
+
+            if (currentIndex >= objects.Length)
+            {
+                currentIndex = 0;
+            }
+
+            yield return new WaitForSeconds(inactiveDuration);
         }
 
-        yield return new WaitForSeconds(timeInterval);
-
-        objects[currentIndex].SetActive(true);
-        currentIndex++;
-
-        if (currentIndex >= objects.Length)
-        {
-            currentIndex = 0;
-        }
-
-        yield return new WaitForSeconds(timeInterval);
-
-        objects[currentIndex].SetActive(true);
         routinecheck = false;
     }
 }
