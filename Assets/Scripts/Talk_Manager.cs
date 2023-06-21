@@ -29,6 +29,7 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(300, new string[] { "key2" });
         talkData.Add(400, new string[] { "num3" });
         talkData.Add(500, new string[] { "num4" });
+        talkData.Add(600, new string[] { "불이 켜졌다." });
 
         talkData.Add(0+3000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });
         // quest data
@@ -77,8 +78,11 @@ public class Talk_Manager : MonoBehaviour
                     return talkData[id - id % 10][talkIndex];
             }
         }
-        if (talkIndex == talkData[id].Length)
+        if (talkIndex == talkData[id].Length){
             return null;
+        }
+
+
         else
             return talkData[id][talkIndex];
     }

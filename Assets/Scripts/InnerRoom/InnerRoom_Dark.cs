@@ -7,6 +7,11 @@ public class InnerRoom_Dark : MonoBehaviour
     public GameObject Controller;
     public GameObject[] activateObjects; // 활성화할 오브젝트들을 배열로 저장
     public GameObject deactivateObject; // 비활성화할 오브젝트
+    public GameObject EventStart;
+    public int once_check = 1;
+    public bool errorcheck = true; // 지속 인덱스 증가 방지용
+
+
     private int i = 0;
 
     private int activatedCount = 0; // 활성화된 오브젝트 수를 추적
@@ -16,27 +21,26 @@ public class InnerRoom_Dark : MonoBehaviour
     private void Update()
     {
         // 각 오브젝트마다 검사하고 활성화된 오브젝트 수 증가
-
+        if (errorcheck)
+        {
             if (activateObjects[i].activeSelf)
             {
                 activatedCount++;
                 Debug.Log("활성화");
                 i++;
             }
+        }
+           
         // 만약 활성화된 오브젝트 수가 3개라면 페이드아웃 효과 시작
         if (activatedCount >= 3 && !isFadingOut)
         {
             StartCoroutine(FadeOutObject());
             isFadingOut = true;
+            errorcheck = false;
         }
 
 
-        // 만약 활성화된 오브젝트 수가 3개라면 비활성화할 오브젝트를 비활성화
-        if (activatedCount >= 3)
-        {
-            StartCoroutine(FadeOutObject());
-            isFadingOut = true;
-        }
+
 
     }
     private IEnumerator FadeOutObject()
@@ -66,8 +70,11 @@ public class InnerRoom_Dark : MonoBehaviour
         }
 
         // 페이드아웃 완료 후 오브젝트 비활성화
+   
+        EventStart.SetActive(true);
         deactivateObject.SetActive(false);
         Controller.GetComponent<InnerRoom_Dark>().enabled = false;
+
     }
 
 }

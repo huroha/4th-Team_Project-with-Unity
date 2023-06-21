@@ -23,15 +23,20 @@ public class Game_Manager : MonoBehaviour
 
         // 대화창 on off 처리
         talkPanel.SetActive(isAction);
+        if (!isAction)
+        {
+            Debug.Log("왜 안꺼짐");
+            Solo_Talk.instance.DestoyThis();
+        }
     }
     void Talk(int id, bool isNpc)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
-
         // 대화 data set
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
         if(talkData == null)
         {
+            
             isAction = false;
             talkIndex = 0;
             questManager.CheckQuest(id);

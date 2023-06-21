@@ -13,6 +13,15 @@ public class InnerRoom_Bed2 : MonoBehaviour
     // 현재 상호작용 인덱스
     private int currentInteractionIndex = 0;
 
+    public static InnerRoom_Bed2 instance;
+    public bool e_Check = false;
+    private void Awake()
+    {
+        if (InnerRoom_Bed2.instance == null)
+        {
+           InnerRoom_Bed2.instance = this;
+        }
+    }
     void Start()
     {
         // 상호작용 순서 설정
@@ -22,32 +31,38 @@ public class InnerRoom_Bed2 : MonoBehaviour
     // 상호작용 감지 함수
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 상호작용 대상이 아닌 경우 무시
-        if (!other.gameObject.CompareTag("Bed"))
+        if (e_Check)
         {
-            return;
-        }
-
-        // 현재 상호작용 대상과 다음 상호작용 대상이 맞는지 체크
-        if (other.gameObject == interactionOrder[currentInteractionIndex])
-        {
-            // 상호작용 대상에 대한 처리
-            Debug.Log("Interacting with " + other.gameObject.name);
-
-            // 다음 상호작용 대상으로 인덱스 증가
-            currentInteractionIndex++;
-
-            // 모든 상호작용이 끝나면 초기화
-            if (currentInteractionIndex >= interactionOrder.Length)
+            // 상호작용 대상이 아닌 경우 무시
+            if (!other.gameObject.CompareTag("Bed"))
             {
-                ResetInteraction();
+                return;
+            }
+
+
+            // 현재 상호작용 대상과 다음 상호작용 대상이 맞는지 체크
+            if (other.gameObject == interactionOrder[currentInteractionIndex])
+            {
+
+                // 상호작용 대상에 대한 처리
+                Debug.Log("Interacting with " + other.gameObject.name);
+
+                // 다음 상호작용 대상으로 인덱스 증가
+                currentInteractionIndex++;
+
+                // 모든 상호작용이 끝나면 초기화
+                if (currentInteractionIndex >= interactionOrder.Length)
+                {
+                    ResetInteraction();
+                }
+            }
+            else
+            {
+                // 순서가 맞지 않을 때의 처리
+                Debug.Log("Wrong interaction order! 잘못된 순서" + interactionOrder[currentInteractionIndex].name + " 번으로 현재 상호작용 : " + other.gameObject.name);
             }
         }
-        else
-        {
-            // 순서가 맞지 않을 때의 처리
-            Debug.Log("Wrong interaction order! 잘못된 순서" + interactionOrder[currentInteractionIndex].name + " 번으로 현재 상호작용 : " + other.gameObject.name);
-        }
+        e_Check = false;
     }
 
     // 상호작용 초기화 함수

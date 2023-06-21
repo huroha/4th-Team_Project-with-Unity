@@ -11,6 +11,8 @@ public class Bed_Event : MonoBehaviour
     private int currentIndex = 0;
     private bool routinecheck = false;
 
+
+
     void Start()
     {
         for (int i = 0; i < objects.Length; i++)
