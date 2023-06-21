@@ -27,7 +27,6 @@ public class PlayerActor : MonoBehaviour
     Vector2 sliding;
     Vector2 dir;
     public float slidingSpeed = 300f;
-    bool isFirstSliding = false;
     // Scan
     Vector3 dirVec;
     GameObject scanObject;
