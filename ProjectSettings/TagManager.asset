@@ -15,6 +15,7 @@ TagManager:
   - goal
   - Safe
   - isDoll
+  - Talk
   layers:
   - Default
   - TransparentFX
