@@ -30,7 +30,10 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(400, new string[] { "num3" });
         talkData.Add(500, new string[] { "num4" });
 
+        talkData.Add(0+3000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });
         // quest data
+
+
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
 
         talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
@@ -44,7 +47,11 @@ public class Talk_Manager : MonoBehaviour
 
         portraitData.Add(2000 + 0, portraitArr[4]);
         portraitData.Add(2000 + 1, portraitArr[5]);
+
         
+        portraitData.Add(3000 + 1, portraitArr[1]);         // 혼잣말 부분 test
+        portraitData.Add(3000 + 0, portraitArr[0]);
+
     }
 
     public string GetTalk(int id, int talkIndex)
