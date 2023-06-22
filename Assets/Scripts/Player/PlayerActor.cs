@@ -39,7 +39,7 @@ public class PlayerActor : MonoBehaviour
 
     // Cook
     public GameObject myCook;
-
+    public GameObject myOven;
     private void Awake()
     {
         if(PlayerActor.instance == null)
@@ -116,10 +116,15 @@ public class PlayerActor : MonoBehaviour
                 Debug.Log("set Inven");
                 // key++; key 값을 높여줘야함 그래야 나중에 문을 열 때 개수로 판단
             }
-            if(scanObject.CompareTag("cook")) // 주방 에서 음식을 조리할 때
+            if (scanObject.CompareTag("cook") && myCook.GetComponent<Cook>().isCookOver == false) // 주방 에서 음식을 조리할 때 // 작동을 안하네 왜?
             {
                 inven.SetActive(false);
                 myCook.SetActive(true);
+            }
+            if(scanObject.CompareTag("Oven") && myOven.GetComponent<Oven>().isOvenOver == false && myCook.GetComponent<Cook>().isCookOver == true) // 이건 아예 멈춰버리네..
+            {
+                inven.SetActive(false);
+                myOven.SetActive(true);
             }
         }
     }

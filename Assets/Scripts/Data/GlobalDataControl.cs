@@ -28,6 +28,9 @@ public class GlobalDataControl : MonoBehaviour
     // 오브젝트 관리
     // 열쇠를 발견 했는지 여부 확인
     public bool[] isUsed = new bool[3]; // 총 열쇠조각은 3개이므로 총 3곳의 오브젝트에서 발견되어야 함.
+    // 요리 관련 정보 저장
+    public bool isCookOver = false;
+    public bool isOvenOver = false;
 
     void Awake()
     {
