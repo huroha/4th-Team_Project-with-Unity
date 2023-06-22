@@ -25,7 +25,6 @@ public class Game_Manager : MonoBehaviour
         talkPanel.SetActive(isAction);
         if (!isAction)
         {
-            Debug.Log("¿Ö ¾È²¨Áü");
             Solo_Talk.instance.DestoyThis();
         }
     }
@@ -63,6 +62,8 @@ public class Game_Manager : MonoBehaviour
         {
             selectPanel.SetActive(false);
         }
+
+
         isAction = true;
         talkIndex++;
     }

@@ -29,11 +29,15 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(300, new string[] { "key2" });
         talkData.Add(400, new string[] { "num3" });
         talkData.Add(500, new string[] { "num4" });
-        talkData.Add(600, new string[] { "불이 켜졌다." });
 
-        talkData.Add(0+3000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });
+        // InnerRoom 전용 3만번대
+
+        talkData.Add(0+30000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });       
+        talkData.Add(100+30000, new string[] { "불이 켜졌다." });
+        talkData.Add(200 + 30000, new string[] { "침대에 무언가가...?:1" });
         // quest data
 
+        talkData.Add(10000, new string[] { "다음은 어디였지....?:0" });
 
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
 
@@ -49,9 +53,11 @@ public class Talk_Manager : MonoBehaviour
         portraitData.Add(2000 + 0, portraitArr[4]);
         portraitData.Add(2000 + 1, portraitArr[5]);
 
-        
-        portraitData.Add(3000 + 1, portraitArr[1]);         // 혼잣말 부분 test
-        portraitData.Add(3000 + 0, portraitArr[0]);
+        // InnerRoom 초상화
+        portraitData.Add(30000 + 1, portraitArr[1]);         // 혼잣말 부분 test
+        portraitData.Add(30000 + 0, portraitArr[0]);
+
+        portraitData.Add(30200 + 1, portraitArr[1]);
 
     }
 

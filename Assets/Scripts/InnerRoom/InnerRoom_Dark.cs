@@ -8,6 +8,7 @@ public class InnerRoom_Dark : MonoBehaviour
     public GameObject[] activateObjects; // 활성화할 오브젝트들을 배열로 저장
     public GameObject deactivateObject; // 비활성화할 오브젝트
     public GameObject EventStart;
+    public GameObject Twinkle;
     public int once_check = 1;
     public bool errorcheck = true; // 지속 인덱스 증가 방지용
 
@@ -70,7 +71,7 @@ public class InnerRoom_Dark : MonoBehaviour
         }
 
         // 페이드아웃 완료 후 오브젝트 비활성화
-   
+        Twinkle.SetActive(true);
         EventStart.SetActive(true);
         deactivateObject.SetActive(false);
         Controller.GetComponent<InnerRoom_Dark>().enabled = false;

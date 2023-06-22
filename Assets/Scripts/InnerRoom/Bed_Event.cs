@@ -7,7 +7,7 @@ public class Bed_Event : MonoBehaviour
     public GameObject[] objects;
     public float inactiveDuration = 0.5f;
     public float activeDuration = 1f;
-    public int coroutineCount = 3;
+    public int coroutineCount = 6;
     private int currentIndex = 0;
     private bool routinecheck = false;
 
