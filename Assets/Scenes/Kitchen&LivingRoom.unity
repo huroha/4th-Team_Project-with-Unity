@@ -1121,7 +1121,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0763651, y: -0.046993494}
+  m_Offset: {x: -0.14335108, y: 0.10930693}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1132,7 +1132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9738519, y: 3.1085443}
+  m_Size: {x: 0.83988, y: 2.4386857}
   m_EdgeRadius: 0
 --- !u!212 &193130097
 SpriteRenderer:
@@ -5188,7 +5188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 27
+  m_AssetsPPU: 35
   m_RefResolutionX: 320
   m_RefResolutionY: 180
   m_UpscaleRT: 0
@@ -6726,7 +6726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2e0f8f64899b44ca4386bffbdef06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: 
+  SceneName: Entrance
 --- !u!66 &1528476289
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -9235,7 +9235,7 @@ GameObject:
   - component: {fileID: 1938820780}
   - component: {fileID: 1938820779}
   m_Layer: 3
-  m_Name: Square (1)
+  m_Name: Borderline2
   m_TagString: cook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9269,7 +9269,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.20653987}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9280,7 +9280,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.58692026}
   m_EdgeRadius: 0
 --- !u!212 &1938820778
 SpriteRenderer:
@@ -9324,7 +9324,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

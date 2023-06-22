@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
     // 인벤토리의 아이템 개수를 위한 변수
     public Text[] myText = new Text[5];
     PlayerData myData;
+    public bool getAllItems = false;
     public int keyIndex;
     public int duckIndex;
     public int dollIndex;
@@ -69,37 +70,13 @@ public class Inventory : MonoBehaviour
             duckIndex = GlobalDataControl.Instance.duckIndex;
             dollIndex = GlobalDataControl.Instance.dollIndex;
             foodIndex = GlobalDataControl.Instance.foodIndex;
-        /*
-        if (myTp.getSceneMoveCheck() == true)
-        {
-            // 활성화 여부 관리
-            invArray[keyIndex].SetActive(GlobalDataControl.Instance.invActive[keyIndex]);
-            invArray[duckIndex].SetActive(GlobalDataControl.Instance.invActive[duckIndex]);
-            invArray[dollIndex].SetActive(GlobalDataControl.Instance.invActive[dollIndex]);
-            invArray[foodIndex].SetActive(GlobalDataControl.Instance.invActive[foodIndex]);
-            // 이미지 관리
-            inventory[keyIndex].sprite = GlobalDataControl.Instance.invImage[keyIndex];
-            inventory[duckIndex].sprite = GlobalDataControl.Instance.invImage[duckIndex];
-            inventory[dollIndex].sprite = GlobalDataControl.Instance.invImage[dollIndex];
-            inventory[foodIndex].sprite = GlobalDataControl.Instance.invImage[foodIndex];
-            // 텍스트 관리
-            myText[keyIndex].text = GlobalDataControl.Instance.invText[keyIndex];
-            myText[duckIndex].text = GlobalDataControl.Instance.invText[duckIndex];
-            myText[dollIndex].text = GlobalDataControl.Instance.invText[dollIndex];
-            myText[foodIndex].text = GlobalDataControl.Instance.invText[foodIndex];
-            // 인덱스 관리
-            keyIndex = GlobalDataControl.Instance.keyIndex;
-            duckIndex = GlobalDataControl.Instance.duckIndex;
-            dollIndex = GlobalDataControl.Instance.dollIndex;
-            foodIndex = GlobalDataControl.Instance.foodIndex;
-        }
-        */
     }
 
     // Inventory System (만약 sprite가 같은게 있다면 추가를 하지 않음)
 
     public void setInventory(string itemName)
     {
+        checkAllItems();
         // 함수로 inventory에 스프라이트 넣는 알고리즘 뺏음 + 인벤토리 idx를 리턴시킴
         setInventorySprite(itemName);
             // 아이템을 검사해서 개수를 증가시켜주는 알고리즘
@@ -108,8 +85,9 @@ public class Inventory : MonoBehaviour
                 case "isKey": // key                  
                     myText[keyIndex].text = myData.getKeyCount().ToString(); // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
                     isGetKey = true;
-                    if (myData.getKeyCount() < 3 && player.getScanOb().GetComponent<ObjData>().getIsUsed() == false) // key 개수는 최대 3개
-                    {         
+                    if (myData.getKeyCount() < 1 && player.getScanOb().GetComponent<ObjData>().getIsUsed() == false && getAllItems == true) // key 개수는 최대 3개
+                    {
+                        
                         myData.addKeyCount(); // key 개수 1 증가
                         myText[keyIndex].text = myData.getKeyCount().ToString();
                         saveInvenText(keyIndex);
@@ -123,6 +101,7 @@ public class Inventory : MonoBehaviour
                         myData.addBrItemCount(); // key 개수 1 증가
                         myText[duckIndex].text = myData.getBrItemCount().ToString();
                         saveInvenText(duckIndex);
+                        Debug.Log("오리덕");
                     }
                     break;
                 case "isDoll": // 안방 - 애착인형
@@ -188,8 +167,9 @@ public class Inventory : MonoBehaviour
             {
                 if (invArray[i].activeInHierarchy == false && isConflict == false)
                 {
-                    if (itemName == "isKey" && isGetKey == false)
+                    if (itemName == "isKey" && isGetKey == false && getAllItems == true)
                     {
+                        
                         Debug.Log("-------------------KEY false & false & false--------------------");
                         invArray[i].SetActive(true);
                         inventory[i].sprite = Resources.Load<Sprite>("Img_Key");
@@ -237,6 +217,7 @@ public class Inventory : MonoBehaviour
                         saveInvenActive(foodIndex);
                         saveInvenImage(foodIndex);
                         saveInvenIndex(foodIndex, "food");
+
                         // 1차적으로 인벤토리에서의 위치가 정해짐
                         break;
                     }
@@ -382,6 +363,7 @@ public class Inventory : MonoBehaviour
                 // 여기부턴 아이템이 인벤토리에 존재한다는 가정으로 진행됨.
                 else if (invArray[i].activeInHierarchy == false && isConflict == true)
                 {
+                    Debug.Log("체크를 위한 거 하나");
                     if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
                     {
                         Debug.Log("-------------------KEY false & true & true--------------------");
@@ -423,6 +405,7 @@ public class Inventory : MonoBehaviour
                     Debug.Log("자 i 는 : " + i + "이고 태그는 : " + 
                         itemName + "이고 스프라이트 이름은 : " + inventory[i].sprite.name + "이야");*/
 
+                    Debug.Log("체크를 위한거 두울");
                     // 스프라이트 이름까지 체크해주어야 순서가 뒤바뀌어도 정상적으로 작동함
                     if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
                     {
@@ -454,6 +437,7 @@ public class Inventory : MonoBehaviour
                         invArray[foodIndex].SetActive(true);
                         inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
                         Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
+                        
                         break;
                     }
                 }
@@ -461,6 +445,13 @@ public class Inventory : MonoBehaviour
             // 0~7 까지 전부 중복되서 칸을 차지하지 않게끔
         }
         Debug.Log(isConflict);
+    }
+    void checkAllItems()
+    {
+        if(myData.getBrItemCount() == 1 && myData.getBrItemCount() == 1 && myData.getIrItemCount() == 1)
+        {
+            getAllItems = true;
+        }
     }
     public void savePlayerData()
     {
