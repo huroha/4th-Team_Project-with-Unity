@@ -208,7 +208,6 @@ public class PlayerActor : MonoBehaviour
         {
             isSlide = false;
             StopSliding();
-            Debug.Log("¹ºµ¥ ½Ã¹ß");
         }
     }
     void OnSliding()

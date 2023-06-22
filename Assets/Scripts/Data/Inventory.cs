@@ -84,10 +84,10 @@ public class Inventory : MonoBehaviour
             {
                 case "isKey": // key                  
                     myText[keyIndex].text = myData.getKeyCount().ToString(); // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
-                    isGetKey = true;
+                    //isGetKey = true;
                     if (myData.getKeyCount() < 1 && player.getScanOb().GetComponent<ObjData>().getIsUsed() == false && getAllItems == true) // key 개수는 최대 3개
                     {
-                        
+                        isGetKey = true;
                         myData.addKeyCount(); // key 개수 1 증가
                         myText[keyIndex].text = myData.getKeyCount().ToString();
                         saveInvenText(keyIndex);
@@ -95,9 +95,10 @@ public class Inventory : MonoBehaviour
                     break;
                 case "isDuck": // 욕실 - 오리인형
                     myText[duckIndex].text = myData.getBrItemCount().ToString(); // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
-                    isGetBathRoomItem = true;
+                    //isGetBathRoomItem = true;
                     if (myData.getBrItemCount() < 1) // key 개수는 최대 3개
                     {
+                        isGetBathRoomItem = true;
                         myData.addBrItemCount(); // key 개수 1 증가
                         myText[duckIndex].text = myData.getBrItemCount().ToString();
                         saveInvenText(duckIndex);
@@ -106,9 +107,10 @@ public class Inventory : MonoBehaviour
                     break;
                 case "isDoll": // 안방 - 애착인형
                     myText[dollIndex].text = myData.getIrItemCount().ToString(); ; // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
-                    isGetInnerRoomItem = true;
+                    //isGetInnerRoomItem = true;
                     if (myData.getIrItemCount() < 1) // key 개수는 최대 3개
                     {
+                        isGetInnerRoomItem = true;
                         myData.addIrItemCount(); // key 개수 1 증가
                         myText[dollIndex].text = myData.getIrItemCount().ToString();
                         saveInvenText(dollIndex);
@@ -116,9 +118,10 @@ public class Inventory : MonoBehaviour
                     break;
                 case "isFood": // 주방 - 사료
                     myText[foodIndex].text = myData.getKrItemCount().ToString(); ; // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
-                    isGetKitchenItem = true;
+                    //isGetKitchenItem = true;
                     if (myData.getKrItemCount() < 1) // key 개수는 최대 3개
                     {
+                        isGetKitchenItem = true;
                         myData.addKrItemCount(); // key 개수 1 증가
                         myText[foodIndex].text = myData.getKrItemCount().ToString();
                         saveInvenText(foodIndex);
@@ -131,41 +134,13 @@ public class Inventory : MonoBehaviour
 
     private void setInventorySprite(string itemName)
     {
-        bool isConflict = false;
-        if (player.getScanOb() != null)
-        {
-            if ((player.getScanOb().tag == "isKey" && isGetKey == true))
-            {
-                Debug.Log("----------------KEY 에 의해 중복 발생-----------------------");
-                isConflict = true;
-            }
-            else if ((player.getScanOb().tag == "isDoll" && isGetInnerRoomItem == true))
-            {
-                Debug.Log("----------------DOLL 에 의해 중복 발생----------------------");
-                isConflict = true;
-            }
-        }
-        else
-        {
-            if(isGetKitchenItem == true)
-            {
-                Debug.Log("----------------FOOD 에 의해 중복 발생----------------------");
-                isConflict = true;
-            }
-            else if (isGetBathRoomItem == true)
-            {
-                Debug.Log("----------------DUCK 에 의해 중복 발생----------------------");
-                isConflict = true;
-            }
-        }
-
         for (int i = 0; i < 5; i++)
         {
             // 만약 i번 인벤토리 칸이 active = false 일때 => 인벤토리 활성화 여부를 따져서 같은칸에 여러가지 아이템이 들어가는것을 방지
             // isConflict = false 일 때 => 중복을 체크해서 만약 똑같은 아이템이 인벤토리에 존재한다면 아이템을 넣지 않음
             if (player.getScanOb() != null)
-            {
-                if (invArray[i].activeInHierarchy == false && isConflict == false)
+            {   // 인벤토리에 아이템을 처음 배치하는 경우
+                if (invArray[i].activeInHierarchy == false)
                 {
                     if (itemName == "isKey" && isGetKey == false && getAllItems == true)
                     {
@@ -222,51 +197,9 @@ public class Inventory : MonoBehaviour
                         break;
                     }
                 }
-                // 씬 전환 했을때의 경우
-                // 여기부턴 아이템이 인벤토리에 존재한다는 가정으로 진행됨.
-                else if (invArray[i].activeInHierarchy == false && isConflict == true)
+                // 인벤토리에 아이템이 이미 존재하는 경우
+                else if (invArray[i].activeInHierarchy == true) 
                 {
-                    if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
-                    {
-                        Debug.Log("-------------------KEY false & true & true--------------------");
-                        invArray[keyIndex].SetActive(true);
-                        inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
-                        Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
-                        break;
-                    }
-                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[duckIndex].sprite.name == "Img_Duck")
-                    {
-                        Debug.Log("-------------------DUCK false & true & true--------------------");
-                        invArray[duckIndex].SetActive(true);
-                        inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
-                        Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
-                        break;
-                    }
-                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
-                    {
-                        Debug.Log("-------------------DOLL false & true & true--------------------");
-                        invArray[dollIndex].SetActive(true);
-                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
-                        Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
-                        break;
-                    }
-                    else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
-                    {
-                        Debug.Log("-------------------FOOD false & true & true--------------------");
-                        invArray[foodIndex].SetActive(true);
-                        inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
-                        Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
-                        break;
-                    }
-                }
-
-                else if (invArray[i].activeInHierarchy == true && isConflict == true)
-                {
-                    /*
-                    Debug.Log("엑티브에 충돌");
-                    Debug.Log("자 i 는 : " + i + "이고 태그는 : " + 
-                        itemName + "이고 스프라이트 이름은 : " + inventory[i].sprite.name + "이야");*/
-
                     // 스프라이트 이름까지 체크해주어야 순서가 뒤바뀌어도 정상적으로 작동함
                     if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
                     {
@@ -304,8 +237,10 @@ public class Inventory : MonoBehaviour
             }
             else if (player.getScanOb() == null)
             {
-                if (invArray[i].activeInHierarchy == false && isConflict == false)
+                // 인벤토리에 아이템을 처음 배치하는 경우
+                if (invArray[i].activeInHierarchy == false)
                 {
+                    Debug.Log("For CHECK : " + i);
                     if (itemName == "isKey" && isGetKey == false)
                     {
                         Debug.Log("-------------------KEY false & false & false--------------------");
@@ -319,7 +254,7 @@ public class Inventory : MonoBehaviour
                         // 1차적으로 인벤토리에서의 위치가 정해짐
                         break;
                     }
-                    else if (itemName == "isDuck" && isGetKitchenItem == false)
+                    else if (itemName == "isDuck" && isGetBathRoomItem == false)
                     {
                         Debug.Log("-------------------DUCK false & false & false--------------------");
                         invArray[i].SetActive(true);
@@ -358,12 +293,14 @@ public class Inventory : MonoBehaviour
                         // 1차적으로 인벤토리에서의 위치가 정해짐
                         break;
                     }
+                    else
+                        Debug.Log("대체 왜 안됨? :" + itemName + " " + isGetBathRoomItem);
                 }
                 // 씬 전환 했을때의 경우
-                // 여기부턴 아이템이 인벤토리에 존재한다는 가정으로 진행됨.
-                else if (invArray[i].activeInHierarchy == false && isConflict == true)
+                // 인벤토리에 아이템이 이미 존재하는 경우
+                else if (invArray[i].activeInHierarchy == true)
                 {
-                    Debug.Log("체크를 위한 거 하나");
+                    Debug.Log("체크를 위한 거 하나 : " + i);
                     if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
                     {
                         Debug.Log("-------------------KEY false & true & true--------------------");
@@ -372,7 +309,7 @@ public class Inventory : MonoBehaviour
                         Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
                         break;
                     }
-                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[duckIndex].sprite.name == "Img_Duck")
+                    else if (itemName == "isDuck" && isGetBathRoomItem == true && inventory[duckIndex].sprite.name == "Img_Duck")
                     {
                         Debug.Log("-------------------DUCK false & true & true--------------------");
                         invArray[duckIndex].SetActive(true);
@@ -396,55 +333,14 @@ public class Inventory : MonoBehaviour
                         Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
                         break;
                     }
-                }
-
-                else if (invArray[i].activeInHierarchy == true && isConflict == true)
-                {
-                    /*
-                    Debug.Log("엑티브에 충돌");
-                    Debug.Log("자 i 는 : " + i + "이고 태그는 : " + 
-                        itemName + "이고 스프라이트 이름은 : " + inventory[i].sprite.name + "이야");*/
-
-                    Debug.Log("체크를 위한거 두울");
-                    // 스프라이트 이름까지 체크해주어야 순서가 뒤바뀌어도 정상적으로 작동함
-                    if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
+                    else
                     {
-                        Debug.Log("-------------------KEY true & true & true--------------------");
-                        invArray[keyIndex].SetActive(true);
-                        inventory[keyIndex].sprite = Resources.Load<Sprite>("Img_Key");
-                        Debug.Log("Set inventory : " + inventory[keyIndex].sprite.name);
-                        break;
-                    }
-                    else if (itemName == "isDuck" && isGetKitchenItem == true && inventory[i].sprite.name == "Img_Duck")
-                    {
-                        Debug.Log("-------------------DUCK true & true & true--------------------");
-                        invArray[duckIndex].SetActive(true);
-                        inventory[duckIndex].sprite = Resources.Load<Sprite>("Img_Duck");
-                        Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
-                        break;
-                    }
-                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
-                    {
-                        Debug.Log("-------------------DOLL true & true & true--------------------");
-                        invArray[dollIndex].SetActive(true);
-                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
-                        Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
-                        break;
-                    }
-                    else if (itemName == "isFood" && isGetKitchenItem == true && inventory[foodIndex].sprite.name == "Img_Food")
-                    {
-                        Debug.Log("-------------------FOOD false & true & true--------------------");
-                        invArray[foodIndex].SetActive(true);
-                        inventory[foodIndex].sprite = Resources.Load<Sprite>("Img_Food");
-                        Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
-                        
-                        break;
+                        Debug.Log("적용 안됨?");
                     }
                 }
             }
             // 0~7 까지 전부 중복되서 칸을 차지하지 않게끔
         }
-        Debug.Log(isConflict);
     }
     void checkAllItems()
     {
