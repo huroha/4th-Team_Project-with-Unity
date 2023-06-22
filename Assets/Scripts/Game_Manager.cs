@@ -23,15 +23,19 @@ public class Game_Manager : MonoBehaviour
 
         // 대화창 on off 처리
         talkPanel.SetActive(isAction);
+        if (!isAction)
+        {
+            Solo_Talk.instance.DestoyThis();
+        }
     }
     void Talk(int id, bool isNpc)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
-
         // 대화 data set
         string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
         if(talkData == null)
         {
+            
             isAction = false;
             talkIndex = 0;
             questManager.CheckQuest(id);
@@ -58,6 +62,21 @@ public class Game_Manager : MonoBehaviour
         {
             selectPanel.SetActive(false);
         }
+        if(talkData == "확인해볼까?:0")
+        {
+            Bed_Event.instance.actionSwitch = 0;
+        }
+        if(talkData == "무언가가 있는거 같아.:0")
+        {
+            
+            InnerRoom_Rabbit.instance.dollcheck = true;
+        }
+        if(talkData == "토끼 인형을 발견했다.")
+        {
+            InnerRoom_Rabbit.instance.keycheck = true;
+        }
+
+
         isAction = true;
         talkIndex++;
     }

@@ -34,6 +34,8 @@ public class PlayerActor : MonoBehaviour
     // Inventory
     public GameObject inven;
     public Inventory myInv;
+    // Inner
+    public bool innerStart = false;
 
     // Cook
     public GameObject myCook;
@@ -98,11 +100,14 @@ public class PlayerActor : MonoBehaviour
         else if (hDown && h == -1) // 위쪽
             dirVec = Vector3.left;
 
+      
+
         //Scan Object
         if (Input.GetKeyDown(KeyCode.E) && scanObject != null)
         {
             //manager.Action(scanObject);
             PressEKey();
+         
 
             if(scanObject.layer == 3) // 오브젝트 일 때
             {

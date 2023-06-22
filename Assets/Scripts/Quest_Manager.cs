@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Quest_Manager : MonoBehaviour
 {
-    public int questId;
-    public int questActionIndex;
-    Dictionary<int, QuestData> questList;
+    public int questId;                     // 진행중인 퀘스트
+    public int questActionIndex;           
+    Dictionary<int, QuestData> questList;       
 
     public static Quest_Manager instance;
     void Awake()
@@ -27,6 +27,12 @@ public class Quest_Manager : MonoBehaviour
         questList.Add(30, new QuestData("마무리", new int[] { 5000, 2000 }));
 
         questList.Add(120, new QuestData("퀘스트 확인용", new int[] { 5000, 2000 }));
+
+
+        questList.Add(40, new QuestData("침대확인1", new int[] { 35400, 35500 }));
+        questList.Add(50, new QuestData("침대확인2", new int[] { 35200, 35300 }));
+        questList.Add(60, new QuestData("침대확인3", new int[] { 35600, 35100 }));
+        questList.Add(70, new QuestData("침대확인 끝", new int[] { 35600, 30000 }));
     }
 
     public int GetQuestTalkIndex(int id)                //npc id 받고 퀘스트 번호 반환
