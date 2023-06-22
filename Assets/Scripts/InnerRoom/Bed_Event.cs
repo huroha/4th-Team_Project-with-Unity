@@ -10,9 +10,16 @@ public class Bed_Event : MonoBehaviour
     public int coroutineCount = 6;
     private int currentIndex = 0;
     private bool routinecheck = false;
+    public int actionSwitch = 1;
+    public static Bed_Event instance;
 
-
-
+    private void Awake()
+    {
+        if (Bed_Event.instance == null)
+        {
+            Bed_Event.instance = this;
+        }
+    }
     void Start()
     {
         for (int i = 0; i < objects.Length; i++)
@@ -23,7 +30,7 @@ public class Bed_Event : MonoBehaviour
 
     void Update()
     {
-        if (!routinecheck && Input.GetKeyDown(KeyCode.K))       // E 키 and 한번만 실행되도록 설정
+        if (!routinecheck && Input.GetKeyDown(KeyCode.E) && actionSwitch == 0)       // E 키 and 한번만 실행되도록 설정
         {
             StartCoroutine(ActivateObjects());
         }
@@ -49,6 +56,7 @@ public class Bed_Event : MonoBehaviour
         }
 
         routinecheck = false;
+        actionSwitch = 1;
     }
 }
 

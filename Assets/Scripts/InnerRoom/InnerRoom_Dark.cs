@@ -9,9 +9,11 @@ public class InnerRoom_Dark : MonoBehaviour
     public GameObject deactivateObject; // 비활성화할 오브젝트
     public GameObject EventStart;
     public GameObject Twinkle;
+   
+
+    public bool dollcheck = false;
     public int once_check = 1;
     public bool errorcheck = true; // 지속 인덱스 증가 방지용
-
 
     private int i = 0;
 
@@ -19,6 +21,11 @@ public class InnerRoom_Dark : MonoBehaviour
 
     private bool isFadingOut = false; // 페이드아웃이 진행 중인지 확인
     private float fadeDuration = 1.5f; // 페이드아웃 효과의 지속 시간
+
+    
+
+   
+
     private void Update()
     {
         // 각 오브젝트마다 검사하고 활성화된 오브젝트 수 증가
@@ -39,7 +46,6 @@ public class InnerRoom_Dark : MonoBehaviour
             isFadingOut = true;
             errorcheck = false;
         }
-
 
 
 

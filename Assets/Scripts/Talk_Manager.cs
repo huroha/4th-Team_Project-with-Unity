@@ -33,17 +33,38 @@ public class Talk_Manager : MonoBehaviour
         // InnerRoom 전용 3만번대
 
         talkData.Add(0+30000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });       
-        talkData.Add(100+30000, new string[] { "불이 켜졌다." });
-        talkData.Add(200 + 30000, new string[] { "침대에 무언가가...?:1" });
+        talkData.Add(100+30000, new string[] { "방이 밝아졌다." });
+        talkData.Add(200 + 30000, new string[] { "침대에 무언가가...?:1","확인해볼까?:0" });
+
+        talkData.Add(35100, new string[] { "순서대로 확인해봐야될거같아.:0" });
+        talkData.Add(35200, new string[] { "순서대로 확인해봐야될거같아.:0" });
+        talkData.Add(35300, new string[] { "순서대로 확인해봐야될거같아.:0" });
+        talkData.Add(35400, new string[] { "순서대로 확인해봐야될거같아.:0" });
+        talkData.Add(35500, new string[] { "순서대로 확인해봐야될거같아.:0" });
+        talkData.Add(35600, new string[] { "순서대로 확인해봐야될거같아.:0" });
+        talkData.Add(35700, new string[] { "토끼 인형을 발견했다." });
+        // InnerRoom quest
+
+        talkData.Add(40 + 35400, new string[] { "다음으로 넘어가자.:0" });
+        talkData.Add(41 + 35500, new string[] { "다음으로 넘어가자.:0" });
+
+        talkData.Add(50 + 35200, new string[] { "다음으로 넘어가자.:0" });
+        talkData.Add(51 + 35300, new string[] { "다음으로 넘어가자.:0" });
+
+        talkData.Add(60 + 35600, new string[] { "다음으로 넘어가자.:0" });
+        talkData.Add(61 + 35100, new string[] { "무언가가 있는거 같아.:0" });
+        talkData.Add(70 + 35100, new string[] { "인형이 놓여있던 장소야.:0" });
+
+
         // quest data
 
-        talkData.Add(10000, new string[] { "다음은 어디였지....?:0" });
 
-        talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
 
-        talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
-        talkData.Add(30 + 2000, new string[] { "선택지성공1:0", "선택지성공2:1" });
-        talkData.Add(100 + 2000, new string[] { "다시 시도quest대화 확인1:0", "다시 시도quest대화 확인2:1" });
+        //talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
+
+        //talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
+        // talkData.Add(30 + 2000, new string[] { "선택지성공1:0", "선택지성공2:1" });
+        //talkData.Add(100 + 2000, new string[] { "다시 시도quest대화 확인1:0", "다시 시도quest대화 확인2:1" });
         // 초상화 data
         portraitData.Add(1000 + 0,portraitArr[0]);
         portraitData.Add(1000 + 1, portraitArr[1]);
@@ -54,10 +75,20 @@ public class Talk_Manager : MonoBehaviour
         portraitData.Add(2000 + 1, portraitArr[5]);
 
         // InnerRoom 초상화
-        portraitData.Add(30000 + 1, portraitArr[1]);         // 혼잣말 부분 test
+        portraitData.Add(30000 + 1, portraitArr[1]);         // 진입 혼잣말
         portraitData.Add(30000 + 0, portraitArr[0]);
 
+        portraitData.Add(30200 + 0, portraitArr[1]);        // 불켜짐
         portraitData.Add(30200 + 1, portraitArr[1]);
+
+        //InnerRoom quest 초상화
+        portraitData.Add(35100 + 0, portraitArr[0]);
+        portraitData.Add(35200 + 0, portraitArr[0]);
+        portraitData.Add(35300 + 0, portraitArr[0]);
+        portraitData.Add(35400 + 0, portraitArr[0]);
+        portraitData.Add(35500 + 0, portraitArr[0]);
+        portraitData.Add(35600 + 0, portraitArr[0]);
+        
 
     }
 

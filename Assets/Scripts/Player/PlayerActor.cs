@@ -100,10 +100,7 @@ public class PlayerActor : MonoBehaviour
         else if (hDown && h == -1) // À§ÂÊ
             dirVec = Vector3.left;
 
-        if (Input.GetKeyDown(KeyCode.E) && innerStart)
-        {
-            InnerRoom_Bed2.instance.e_Check = true;
-        }
+      
 
         //Scan Object
         if (Input.GetKeyDown(KeyCode.E) && scanObject != null)
