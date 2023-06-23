@@ -58,7 +58,9 @@ public class Talk_Manager : MonoBehaviour
 
         // Boss 40000번대
         talkData.Add(0 + 40000, new string[] { "중앙에 무언가가 있어...:1", "확인해보자:0" });
-        // quest data
+        talkData.Add(0 + 41000, new string[] { "제단이 나왔어...:0" });
+        talkData.Add(0 + 40100, new string[] { "아이템 올려두었따." });
+        // Boss quest data  1000번대 활용
 
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
 
@@ -92,6 +94,9 @@ public class Talk_Manager : MonoBehaviour
         //Boss 초상화
         portraitData.Add(40000 + 0, portraitArr[0]);
         portraitData.Add(40000 + 1, portraitArr[1]);
+        portraitData.Add(41000 + 0, portraitArr[0]);
+
+
 
 
     }

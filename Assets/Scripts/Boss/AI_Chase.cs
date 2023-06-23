@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class AI_Chase : MonoBehaviour
 {
+    
     public GameObject player;
     public float speed;
-
+    public GameObject spirit;
+    public Transform spiritPos;
     private float distance;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+  
     // Update is called once per frame
     void Update()
     {
@@ -24,6 +21,18 @@ public class AI_Chase : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);   // 플레이어 따라감
         transform.rotation = Quaternion.Euler(Vector3.forward * angle);     // 앞을 보면서
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("플레이어 충돌 확인");
+            Destroy(spirit);
+            Instantiate(spirit, spiritPos.transform.position, spiritPos.transform.rotation);
+
+        }
     }
 
 }

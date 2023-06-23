@@ -75,7 +75,12 @@ public class Game_Manager : MonoBehaviour
         {
             InnerRoom_Rabbit.instance.keycheck = true;
         }
-
+        if(talkData== "아이템 올려두었따.")
+        {
+            Boss_EventController.instance.keycheck_1 = true;
+            AI_DestroyCheck.instance.Clear.SetActive(false);
+        }
+      
 
         isAction = true;
         talkIndex++;
