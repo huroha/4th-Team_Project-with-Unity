@@ -33,13 +33,14 @@ public class Bed_Event : MonoBehaviour
         if (!routinecheck && Input.GetKeyDown(KeyCode.E) && actionSwitch == 0)       // E 키 and 한번만 실행되도록 설정
         {
             StartCoroutine(ActivateObjects());
+            
         }
     }
 
     IEnumerator ActivateObjects()
     {
         routinecheck = true;
-
+       
         for (int i = 0; i < coroutineCount; i++)
         {
             objects[currentIndex].SetActive(true);
@@ -55,6 +56,7 @@ public class Bed_Event : MonoBehaviour
             yield return new WaitForSeconds(inactiveDuration);
         }
 
+        
         routinecheck = false;
         actionSwitch = 1;
     }

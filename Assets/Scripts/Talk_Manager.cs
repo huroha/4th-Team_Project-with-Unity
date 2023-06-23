@@ -30,7 +30,7 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(400, new string[] { "가운데에 온도 조절 버튼을 눌러 온도를 맞춰보자!" });
         talkData.Add(500, new string[] { "num4" });
 
-        // InnerRoom 전용 3만번대
+        // InnerRoom 전용 30000번대
 
         talkData.Add(0+30000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });       
         talkData.Add(100+30000, new string[] { "방이 밝아졌다." });
@@ -55,16 +55,15 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(61 + 35100, new string[] { "무언가가 있는거 같아.:0" });
         talkData.Add(70 + 35100, new string[] { "인형이 놓여있던 장소야.:0" });
 
-
+        // Boss 40000번대
+        talkData.Add(0 + 40000, new string[] { "중앙에 무언가가 있어...:1", "확인해보자:0" });
         // quest data
 
+        talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
 
-
-        //talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
-
-        //talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
-        // talkData.Add(30 + 2000, new string[] { "선택지성공1:0", "선택지성공2:1" });
-        //talkData.Add(100 + 2000, new string[] { "다시 시도quest대화 확인1:0", "다시 시도quest대화 확인2:1" });
+        talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
+        talkData.Add(30 + 2000, new string[] { "선택지성공1:0", "선택지성공2:1" });
+        talkData.Add(100 + 2000, new string[] { "다시 시도quest대화 확인1:0", "다시 시도quest대화 확인2:1" });
         // 초상화 data
         portraitData.Add(1000 + 0,portraitArr[0]);
         portraitData.Add(1000 + 1, portraitArr[1]);
@@ -88,7 +87,11 @@ public class Talk_Manager : MonoBehaviour
         portraitData.Add(35400 + 0, portraitArr[0]);
         portraitData.Add(35500 + 0, portraitArr[0]);
         portraitData.Add(35600 + 0, portraitArr[0]);
-        
+
+        //Boss 초상화
+        portraitData.Add(40000 + 0, portraitArr[0]);
+        portraitData.Add(40000 + 1, portraitArr[1]);
+
 
     }
 
