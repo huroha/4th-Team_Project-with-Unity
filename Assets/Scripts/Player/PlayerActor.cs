@@ -112,21 +112,26 @@ public class PlayerActor : MonoBehaviour
             if(scanObject.layer == 3) // 오브젝트 일 때
             {
                 myInv.setInventory(scanObject.tag); // 어떤 물체인지 정보를 넘겨서 그 아이템 개수를 증가시키기 위한 매개변수
-                scanObject.GetComponent<ObjData>().setIsUsed();
+                //scanObject.GetComponent<ObjData>().setIsUsed();
                 Debug.Log("set Inven");
                 // key++; key 값을 높여줘야함 그래야 나중에 문을 열 때 개수로 판단
+
+                
             }
-            if (scanObject.CompareTag("cook") && myCook.GetComponent<Cook>().isCookOver == false) // 주방 에서 음식을 조리할 때 // 작동을 안하네 왜?
+            if (scanObject.CompareTag("cook") && GlobalDataControl.Instance.isCookOver == false) // 주방 에서 음식을 조리할 때 // 작동을 안하네 왜?
             {
                 inven.SetActive(false);
                 myCook.SetActive(true);
+                speed = 0f;
             }
-            if(scanObject.CompareTag("Oven") && myOven.GetComponent<Oven>().isOvenOver == false && myCook.GetComponent<Cook>().isCookOver == true) // 이건 아예 멈춰버리네..
+            else if (scanObject.CompareTag("Oven") && GlobalDataControl.Instance.isCookOver == true && GlobalDataControl.Instance.isOvenOver == false) // 이건 아예 멈춰버리네..
             {
                 inven.SetActive(false);
                 myOven.SetActive(true);
+                speed = 0f;
             }
         }
+        Debug.Log("name is : " + scanObject);
     }
     
     private void FixedUpdate()

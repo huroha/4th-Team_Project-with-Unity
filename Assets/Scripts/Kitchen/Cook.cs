@@ -11,6 +11,7 @@ public class Cook : MonoBehaviour
     // Cook의 조리를 멈추는데 필요한 변수들
     public GameObject myInv;
     public GameObject myContainer;
+    public GameObject myData;
     // 영역 체크를 위한 변수
     public GameObject[] correctAreaOb = new GameObject[7];
     RectTransform[] correctAreaRect = new RectTransform[7];
@@ -21,6 +22,11 @@ public class Cook : MonoBehaviour
     bool isCorOb3 = false;
     bool isCorOb4 = false;
     public bool isCookOver = false;
+    // 연출을 위한 변수
+    public GameObject[] vegetables = new GameObject[4];
+    //
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +65,10 @@ public class Cook : MonoBehaviour
         {
             myInv.SetActive(true);
             myContainer.SetActive(false);
-            myInv.GetComponent<Inventory>().setInventory("isFood");
+            myData.GetComponent<ObjData>().changeIsUsed();
+            myData.GetComponent<ObjData>().setIsUsed();
+            savePlayerData();
+            player.GetComponent<PlayerActor>().speed = 3.8f;
         }
     }
     
@@ -86,14 +95,17 @@ public class Cook : MonoBehaviour
             if (transform.localPosition.x >= rangePosStartX[0].x && transform.localPosition.x <= rangePosEndX[0].x)
             {
                 isCorOb1 = true;
+                vegetables[0].SetActive(true);
             }
             else if (transform.localPosition.x >= rangePosStartX[1].x && transform.localPosition.x <= rangePosEndX[1].x)
             {
                 isCorOb2 = true;
+                vegetables[1].SetActive(true);
             }
             else if (transform.localPosition.x >= rangePosStartX[2].x && transform.localPosition.x <= rangePosEndX[2].x)
             {
                 isCorOb3 = true;
+                vegetables[2].SetActive(true);
             }
         }
         else if (correctAreaOb[3].activeSelf == true && correctAreaOb[4].activeSelf == true && correctAreaOb[5].activeSelf == true && correctAreaOb[6].activeSelf == true) // 2 PHAZE
@@ -113,10 +125,13 @@ public class Cook : MonoBehaviour
             else if (transform.localPosition.x >= rangePosStartX[6].x && transform.localPosition.x <= rangePosEndX[6].x)
             {
                 isCorOb4 = true;
+                vegetables[3].SetActive(true);
             }
 
             if (isCorOb1 == true && isCorOb2 == true && isCorOb3 == true && isCorOb4 == true)
+            {
                 isCookOver = true;
+            }
         }
         changeTiming();
     }

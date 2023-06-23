@@ -16,15 +16,16 @@ public class Oven : MonoBehaviour
     RectTransform[] correctAreaRect = new RectTransform[4];
     Vector2[] rangePosStartX = new Vector2[4];
     Vector2[] rangePosEndX = new Vector2[4];
-    bool isCorOb1 = false;
-    bool isCorOb2 = false;
-    bool isCorOb3 = false;
-    bool isCorOb4 = false;
+    public bool isCorOb1 = false;
+    public bool isCorOb2 = false;
+    public bool isCorOb3 = false;
+    public bool isCorOb4 = false;
     public bool isOvenOver = false;
     // 애니메이션을 위한 변수
     public GameObject[] ButtonController = new GameObject[2];
     //
     public Cook myCook;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +49,9 @@ public class Oven : MonoBehaviour
     {
         isOvenOver = GlobalDataControl.Instance.isOvenOver;
 
+        if (isCorOb1 == true && isCorOb2 == true && isCorOb3 == true && isCorOb4 == true)
+            isOvenOver = true;
+
         if (!isTrigger)
         {
             myNote.transform.Translate(new Vector3(noteSpeed * Time.deltaTime, 0f, 0f));
@@ -56,15 +60,13 @@ public class Oven : MonoBehaviour
         {
             myNote.transform.Translate(new Vector3(noteSpeed * Time.deltaTime * -1f, 0f, 0f));
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            checkIsValid();
-        }
         if (isOvenOver)
         {
             myInv.SetActive(true);
             myContainer.SetActive(false);
+            savePlayerData();
             myInv.GetComponent<Inventory>().setInventory("isFood");
+            player.GetComponent<PlayerActor>().speed = 3.8f;
         }
     }
 
@@ -146,13 +148,14 @@ public class Oven : MonoBehaviour
                     ButtonController[0].SetActive(true);
                 }
             }
-
-            if (isCorOb1 == true && isCorOb2 == true && isCorOb3 == true && isCorOb4 == true)
-                isOvenOver = true;
         }
     }
     public void savePlayerData()
     {
         GlobalDataControl.Instance.isOvenOver = isOvenOver;
+    }
+    public void buttonCheck()
+    {
+        checkIsValid();
     }
 }

@@ -26,8 +26,8 @@ public class Talk_Manager : MonoBehaviour
 
         talkData.Add(100, new string[] { "carpet" });
         talkData.Add(200, new string[] { "key1" });
-        talkData.Add(300, new string[] { "key2" });
-        talkData.Add(400, new string[] { "num3" });
+        talkData.Add(300, new string[] { "움직이는 노트가 재료칸에 들어갔을 때 스페이스바를 눌러 재료를 담아보자!" });
+        talkData.Add(400, new string[] { "가운데에 온도 조절 버튼을 눌러 온도를 맞춰보자!" });
         talkData.Add(500, new string[] { "num4" });
 
         // InnerRoom 전용 3만번대
