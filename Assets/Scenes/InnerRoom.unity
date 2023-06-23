@@ -2601,6 +2601,7 @@ MonoBehaviour:
   noteSpeed: 200
   myInv: {fileID: 798161016}
   myContainer: {fileID: 207316197}
+  myData: {fileID: 0}
   correctAreaOb:
   - {fileID: 1593361342}
   - {fileID: 466608002}
@@ -2609,6 +2610,12 @@ MonoBehaviour:
   - {fileID: 34290152}
   - {fileID: 790448509}
   isCookOver: 0
+  vegetables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &477251337
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,7 +3812,7 @@ GameObject:
   - component: {fileID: 788792915}
   m_Layer: 3
   m_Name: rabbit
-  m_TagString: Untagged
+  m_TagString: isDoll
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

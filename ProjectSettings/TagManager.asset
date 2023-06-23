@@ -17,6 +17,7 @@ TagManager:
   - isDoll
   - Talk
   - Oven
+  - isLetter
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,8 @@ public class CinemachineUIManager : MonoBehaviour
 {
     public GameObject Letter;
     public Button closeButton;
+    //
+    public Inventory myInv;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,7 @@ public class CinemachineUIManager : MonoBehaviour
     public void onClickButton()
     {
         Letter.SetActive(false);
+        myInv.setInventory("isLetter");
     }
     private void OnDestroy()
     {

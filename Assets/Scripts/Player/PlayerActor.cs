@@ -130,7 +130,6 @@ public class PlayerActor : MonoBehaviour
                 speed = 0f;
             }
         }
-        Debug.Log("name is : " + scanObject);
     }
     
     private void FixedUpdate()
@@ -204,10 +203,6 @@ public class PlayerActor : MonoBehaviour
             {
                 dir = Vector2.up;
             }
-            
-            
-            Debug.Log(dir);
-            // 플레이어가 바라보는 방향으로 벡터가 정해짐 , 나가는 방향이니까 여기선 반대로
         }
         
     }
