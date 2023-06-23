@@ -34,8 +34,7 @@ public class PlayerActor : MonoBehaviour
     // Inventory
     public GameObject inven;
     public Inventory myInv;
-    // Inner
-    public bool innerStart = false;
+    
 
     // Cook
     public GameObject myCook;
