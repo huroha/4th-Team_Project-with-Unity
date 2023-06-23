@@ -21,11 +21,13 @@ public class Inventory : MonoBehaviour
     public int duckIndex;
     public int dollIndex;
     public int foodIndex;
+    public int letterIndex;
     // 인벤토리 정렬을 위한 변수
     public bool isGetKey;
     public bool isGetBathRoomItem;
     public bool isGetInnerRoomItem;
     public bool isGetKitchenItem;
+    public bool isGetLetter;
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class Inventory : MonoBehaviour
         isGetBathRoomItem = GlobalDataControl.Instance.isGetBathRoomItem;
         isGetInnerRoomItem = GlobalDataControl.Instance.isGetInnerRoomItem;
         isGetKitchenItem = GlobalDataControl.Instance.isGetKitchenItem;
+        isGetLetter = GlobalDataControl.Instance.isGetLetter;
 
         for (int i = 0;i < 5;i++)
         {
@@ -55,21 +58,25 @@ public class Inventory : MonoBehaviour
             invArray[duckIndex].SetActive(GlobalDataControl.Instance.invActive[duckIndex]);
             invArray[dollIndex].SetActive(GlobalDataControl.Instance.invActive[dollIndex]);
             invArray[foodIndex].SetActive(GlobalDataControl.Instance.invActive[foodIndex]);
+            invArray[letterIndex].SetActive(GlobalDataControl.Instance.invActive[letterIndex]);
             // 이미지 관리
             inventory[keyIndex].sprite = GlobalDataControl.Instance.invImage[keyIndex];
             inventory[duckIndex].sprite = GlobalDataControl.Instance.invImage[duckIndex];
             inventory[dollIndex].sprite = GlobalDataControl.Instance.invImage[dollIndex];
             inventory[foodIndex].sprite = GlobalDataControl.Instance.invImage[foodIndex];
+            inventory[letterIndex].sprite = GlobalDataControl.Instance.invImage[letterIndex];
             // 텍스트 관리
             myText[keyIndex].text = GlobalDataControl.Instance.invText[keyIndex];
             myText[duckIndex].text = GlobalDataControl.Instance.invText[duckIndex];
             myText[dollIndex].text = GlobalDataControl.Instance.invText[dollIndex];
             myText[foodIndex].text = GlobalDataControl.Instance.invText[foodIndex];
+            myText[letterIndex].text = GlobalDataControl.Instance.invText[letterIndex];
             // 인덱스 관리
             keyIndex = GlobalDataControl.Instance.keyIndex;
             duckIndex = GlobalDataControl.Instance.duckIndex;
             dollIndex = GlobalDataControl.Instance.dollIndex;
             foodIndex = GlobalDataControl.Instance.foodIndex;
+            letterIndex = GlobalDataControl.Instance.letterIndex;
     }
 
     // Inventory System (만약 sprite가 같은게 있다면 추가를 하지 않음)
@@ -126,9 +133,19 @@ public class Inventory : MonoBehaviour
                         myText[foodIndex].text = myData.getKrItemCount().ToString();
                         saveInvenText(foodIndex);
                     }
-
                     break;
-            }
+                case "isLetter": // 주방 - 사료
+                    myText[letterIndex].text = myData.getSrItemCount().ToString(); ; // 데이터가 저장되도 바로 반영이 안됨(조건안맞아서)
+                    //isGetKitchenItem = true;
+                    if (myData.getSrItemCount() < 1) // key 개수는 최대 3개
+                    {
+                        isGetLetter = true;
+                        myData.addSrItemCount(); // key 개수 1 증가
+                        myText[letterIndex].text = myData.getSrItemCount().ToString();
+                        saveInvenText(letterIndex);
+                    }
+                    break;
+        }
         Debug.Log("item name is : "+ itemName);
     }
 
@@ -173,7 +190,7 @@ public class Inventory : MonoBehaviour
                     {
                         Debug.Log("-------------------DOLL false & false & false--------------------");
                         invArray[i].SetActive(true);
-                        inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Doll");
                         Debug.Log("Set inventory : " + inventory[i].sprite.name);
                         dollIndex = i;
                         saveInvenActive(dollIndex);
@@ -192,6 +209,20 @@ public class Inventory : MonoBehaviour
                         saveInvenActive(foodIndex);
                         saveInvenImage(foodIndex);
                         saveInvenIndex(foodIndex, "food");
+
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
+                    else if (itemName == "isLetter" && isGetLetter == false)
+                    {
+                        Debug.Log("-------------------FOOD false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        letterIndex = i;
+                        saveInvenActive(letterIndex);
+                        saveInvenImage(letterIndex);
+                        saveInvenIndex(letterIndex, "letter");
 
                         // 1차적으로 인벤토리에서의 위치가 정해짐
                         break;
@@ -217,11 +248,11 @@ public class Inventory : MonoBehaviour
                         Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
                         break;
                     }
-                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Doll")
                     {
                         Debug.Log("-------------------DOLL true & true & true--------------------");
                         invArray[dollIndex].SetActive(true);
-                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Doll");
                         Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
                         break;
                     }
@@ -233,6 +264,14 @@ public class Inventory : MonoBehaviour
                         Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
                         break;
                     }
+                    else if (itemName == "isLetter" && isGetLetter == true && inventory[letterIndex].sprite.name == "Img_Letter")
+                    {
+                        Debug.Log("-------------------Letter false & true & true--------------------");
+                        invArray[letterIndex].SetActive(true);
+                        inventory[letterIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[letterIndex].sprite.name);
+                        break;
+                    }
                 }
             }
             else if (player.getScanOb() == null)
@@ -240,7 +279,6 @@ public class Inventory : MonoBehaviour
                 // 인벤토리에 아이템을 처음 배치하는 경우
                 if (invArray[i].activeInHierarchy == false)
                 {
-                    Debug.Log("For CHECK : " + i);
                     if (itemName == "isKey" && isGetKey == false)
                     {
                         Debug.Log("-------------------KEY false & false & false--------------------");
@@ -271,7 +309,7 @@ public class Inventory : MonoBehaviour
                     {
                         Debug.Log("-------------------DOLL false & false & false--------------------");
                         invArray[i].SetActive(true);
-                        inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Doll");
                         Debug.Log("Set inventory : " + inventory[i].sprite.name);
                         dollIndex = i;
                         saveInvenActive(dollIndex);
@@ -293,14 +331,25 @@ public class Inventory : MonoBehaviour
                         // 1차적으로 인벤토리에서의 위치가 정해짐
                         break;
                     }
-                    else
-                        Debug.Log("대체 왜 안됨? :" + itemName + " " + isGetBathRoomItem);
+                    else if (itemName == "isLetter" && isGetLetter == false)
+                    {
+                        Debug.Log("-------------------FOOD false & false & false--------------------");
+                        invArray[i].SetActive(true);
+                        inventory[i].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[i].sprite.name);
+                        letterIndex = i;
+                        saveInvenActive(letterIndex);
+                        saveInvenImage(letterIndex);
+                        saveInvenIndex(letterIndex, "letter");
+
+                        // 1차적으로 인벤토리에서의 위치가 정해짐
+                        break;
+                    }
                 }
                 // 씬 전환 했을때의 경우
                 // 인벤토리에 아이템이 이미 존재하는 경우
                 else if (invArray[i].activeInHierarchy == true)
                 {
-                    Debug.Log("체크를 위한 거 하나 : " + i);
                     if (itemName == "isKey" && isGetKey == true && inventory[keyIndex].sprite.name == "Img_Key")
                     {
                         Debug.Log("-------------------KEY false & true & true--------------------");
@@ -317,11 +366,11 @@ public class Inventory : MonoBehaviour
                         Debug.Log("Set inventory : " + inventory[duckIndex].sprite.name);
                         break;
                     }
-                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Letter")
+                    else if (itemName == "isDoll" && isGetInnerRoomItem == true && inventory[dollIndex].sprite.name == "Img_Doll")
                     {
                         Debug.Log("-------------------DOLL false & true & true--------------------");
                         invArray[dollIndex].SetActive(true);
-                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        inventory[dollIndex].sprite = Resources.Load<Sprite>("Img_Doll");
                         Debug.Log("Set inventory : " + inventory[dollIndex].sprite.name);
                         break;
                     }
@@ -333,9 +382,13 @@ public class Inventory : MonoBehaviour
                         Debug.Log("Set inventory : " + inventory[foodIndex].sprite.name);
                         break;
                     }
-                    else
+                    else if (itemName == "isLetter" && isGetLetter == true && inventory[letterIndex].sprite.name == "Img_Letter")
                     {
-                        Debug.Log("적용 안됨?");
+                        Debug.Log("-------------------Letter false & true & true--------------------");
+                        invArray[letterIndex].SetActive(true);
+                        inventory[letterIndex].sprite = Resources.Load<Sprite>("Img_Letter");
+                        Debug.Log("Set inventory : " + inventory[letterIndex].sprite.name);
+                        break;
                     }
                 }
             }
@@ -355,6 +408,7 @@ public class Inventory : MonoBehaviour
         GlobalDataControl.Instance.isGetBathRoomItem = isGetBathRoomItem;
         GlobalDataControl.Instance.isGetInnerRoomItem = isGetInnerRoomItem;
         GlobalDataControl.Instance.isGetKitchenItem = isGetKitchenItem;
+        GlobalDataControl.Instance.isGetLetter = isGetLetter;
     }
     
     // 공통적으로 itemIndex 정보를 매개변수로 받아들여야 한다.
@@ -388,6 +442,10 @@ public class Inventory : MonoBehaviour
         else if (itemName == "food")
         {
             GlobalDataControl.Instance.foodIndex = foodIndex;
+        }
+        else if (itemName == "letter")
+        {
+            GlobalDataControl.Instance.letterIndex = letterIndex;
         }
 
     }

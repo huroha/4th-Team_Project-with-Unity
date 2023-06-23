@@ -10,6 +10,7 @@ public class PlayerData : MonoBehaviour
     public int bathRoom_itemCount; // 욕실 오리인형
     public int innerRoom_itemCount; // 안방 애착인형
     public int kitchenRoom_itemCount; // 사료
+    public int startRoom_itemCount;
     // Start is called before the first frame update
     void Start()
     {       
@@ -18,7 +19,8 @@ public class PlayerData : MonoBehaviour
         bathRoom_itemCount = GlobalDataControl.Instance.bathRoom_itemCount;
         innerRoom_itemCount = GlobalDataControl.Instance.innerRoom_itemCount;
         kitchenRoom_itemCount = GlobalDataControl.Instance.kitchenRoom_itemCount;
-    }
+        startRoom_itemCount = GlobalDataControl.Instance.startRoom_itemCount; ;
+}
 
     // Update is called once per frame
     void Update()
@@ -32,6 +34,7 @@ public class PlayerData : MonoBehaviour
         GlobalDataControl.Instance.bathRoom_itemCount = bathRoom_itemCount;
         GlobalDataControl.Instance.innerRoom_itemCount = innerRoom_itemCount;
         GlobalDataControl.Instance.kitchenRoom_itemCount = kitchenRoom_itemCount;
+        GlobalDataControl.Instance.startRoom_itemCount = startRoom_itemCount;
     }
 
     public int getKeyCount()
@@ -50,6 +53,10 @@ public class PlayerData : MonoBehaviour
     {
         return kitchenRoom_itemCount;
     }
+    public int getSrItemCount()
+    {
+        return startRoom_itemCount;
+    }
     public void addKeyCount() // 열쇠 개수
     {
         keyCount++;
@@ -66,5 +73,8 @@ public class PlayerData : MonoBehaviour
     {
         kitchenRoom_itemCount++;
     }
-    
+    public void addSrItemCount() // 주방 사료 개수
+    {
+        startRoom_itemCount++;
+    }
 }
