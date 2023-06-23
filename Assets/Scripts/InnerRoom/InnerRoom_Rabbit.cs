@@ -11,6 +11,7 @@ public class InnerRoom_Rabbit : MonoBehaviour
     public GameObject hidecover;
     public GameObject rabbit2;
     public GameObject hidecover2;
+    public GameObject Twinkle;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class InnerRoom_Rabbit : MonoBehaviour
         {
             rabbit.SetActive(true);
             hidecover.SetActive(false);
+            Twinkle.SetActive(false);
             dollcheck = false;
         }
         if (keycheck)
