@@ -27,6 +27,8 @@ public class PlayerActor : MonoBehaviour
     Vector2 sliding;
     Vector2 dir;
     public float slidingSpeed = 300f;
+    // Sound
+    SoundManager soundManager;
     // Scan
     Vector3 dirVec;
     GameObject scanObject;
@@ -39,6 +41,7 @@ public class PlayerActor : MonoBehaviour
     // Cook
     public GameObject myCook;
     public GameObject myOven;
+
     private void Awake()
     {
         if(PlayerActor.instance == null)
@@ -50,6 +53,7 @@ public class PlayerActor : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
     // 오브젝트 사용 여부
     public bool isUsed = false;
@@ -111,19 +115,17 @@ public class PlayerActor : MonoBehaviour
             if(scanObject.layer == 3) // 오브젝트 일 때
             {
                 myInv.setInventory(scanObject.tag); // 어떤 물체인지 정보를 넘겨서 그 아이템 개수를 증가시키기 위한 매개변수
-                //scanObject.GetComponent<ObjData>().setIsUsed();
                 Debug.Log("set Inven");
-                // key++; key 값을 높여줘야함 그래야 나중에 문을 열 때 개수로 판단
 
                 
             }
-            if (scanObject.CompareTag("cook") && GlobalDataControl.Instance.isCookOver == false) // 주방 에서 음식을 조리할 때 // 작동을 안하네 왜?
+            if (scanObject.CompareTag("cook") && GlobalDataControl.Instance.isCookOver == false) // 주방 에서 음식을 조리할 때
             {
                 inven.SetActive(false);
                 myCook.SetActive(true);
                 speed = 0f;
             }
-            else if (scanObject.CompareTag("Oven") && GlobalDataControl.Instance.isCookOver == true && GlobalDataControl.Instance.isOvenOver == false) // 이건 아예 멈춰버리네..
+            else if (scanObject.CompareTag("Oven") && GlobalDataControl.Instance.isCookOver == true && GlobalDataControl.Instance.isOvenOver == false) // 오븐 에서 음식을 조리할 때
             {
                 inven.SetActive(false);
                 myOven.SetActive(true);
@@ -162,21 +164,6 @@ public class PlayerActor : MonoBehaviour
         else
             scanObject = null;
     }
-    // 슬라이딩 관련 , (왼,아래) = 마이너스 , (오,위) = 플러스
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "SlidingTile" && isFirstSliding == false)
-        {
-            isSlide = true;
-            dir = isHorizontal ? new Vector2(collision.transform.position.x - rigid.transform.position.x, 0)
-                : new Vector2(0, (collision.transform.position.y - rigid.transform.position.y));
-            isFirstSliding = true;
-            // 플레이어가 바라보는 방향으로 벡터가 정해짐 , 만약 플레이어가 key를 유지하지 않을 시 세로 움직임
-        }
-        
-    }
-    */
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "SlidingTile")
@@ -218,6 +205,8 @@ public class PlayerActor : MonoBehaviour
     {
         sliding = dir * slidingSpeed;
         rigid.AddForce(sliding);
+        soundManager.setSource("sliding");
+        soundManager.getSliding().Play();
     }
     void StopSliding()
 

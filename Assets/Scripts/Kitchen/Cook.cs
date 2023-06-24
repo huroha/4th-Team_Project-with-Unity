@@ -26,6 +26,8 @@ public class Cook : MonoBehaviour
     public GameObject[] vegetables = new GameObject[4];
     //
     public GameObject player;
+    // 이펙트
+    public GameObject[] effect = new GameObject[2];
     // 사운드를 위한 변수
     public SoundManager soundManager;
 

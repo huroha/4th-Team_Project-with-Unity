@@ -8,12 +8,19 @@ public class Teleport : MonoBehaviour
     Scene scene;
     static bool isSceneMoved = false;
     public string SceneName;
+    // sound
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         scene = SceneManager.GetActiveScene();
         if (scene.name != "startRoom")
+        {
             isSceneMoved = true;
+            soundManager.setSource("door");
+            soundManager.getDoor().Play();
+        }   
     }
     
     // Update is called once per frame
@@ -43,6 +50,7 @@ public class Teleport : MonoBehaviour
         {
             SceneManager.LoadScene("Yard");
         }
+
     }
 
     public bool getSceneMoveCheck()

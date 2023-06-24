@@ -18,16 +18,17 @@ public class CheckingSystem : MonoBehaviour
             && GlobalDataControl.Instance.innerRoom_itemCount == 1)
         {
             if (gameObject.GetComponent<ObjData>().id != 600)
-                gameObject.GetComponent<ObjData>().id = 600; // 250 으로 변경        
-        }
+                gameObject.GetComponent<ObjData>().id = 600; // 250 으로 변경
 
-        if(gm.isAction == true)
-        {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (gm.isAction == true)
             {
-                gm.isAction = false;
-                Destroy(gameObject, 0.5f);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    gm.isAction = false;
+                    Destroy(gameObject, 0.5f);
+                }
             }
         }
+
     }
 }
