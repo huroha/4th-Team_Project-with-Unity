@@ -4,22 +4,58 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    // 주방 사운드 관련
     public AudioClip[] CookingEffectSounds = new AudioClip[2];
     public AudioClip[] CookingBackgroundSounds = new AudioClip[2];
     public GameObject[] cookAndOven = new GameObject[2];
     AudioSource myAudioSource;
     AudioSource myBackgroundSource;
+    // 욕실 사운드 관련
+    public AudioClip slidingSound;
+    AudioSource slidingSource;
+    // 기본적인 시스템 관련
+    public GameObject door;
+    public AudioClip doorSound;
+    AudioSource doorSource;
+    // 배경 사운드
+    public AudioClip backgroundSound;
+    AudioSource backgroundSource;
     // Start is called before the first frame update
     void Start()
     {
-
+        setSource("background");
     }
 // Update is called once per frame
     void Update()
     {
         
     }
-    
+    public void setSource(string name)
+    {
+        if(name == "door")
+        {
+            doorSource = door.GetComponent<AudioSource>();
+            doorSource.clip = doorSound;
+            doorSource.loop = false;
+            doorSource.mute = false;
+        }
+        else if(name == "sliding")
+        {
+            slidingSource = GetComponent<AudioSource>();
+            slidingSource.clip = slidingSound;
+            slidingSource.loop = false;
+            slidingSource.mute = false;
+        }
+        else if(name == "background")
+        {
+            backgroundSource = GameObject.Find("BGM").GetComponent<AudioSource>();
+            backgroundSource.clip = backgroundSound;
+            backgroundSource.loop = true;
+            backgroundSource.mute = false;
+            backgroundSource.Play();
+        }
+
+    }
     public void setAudioSource(bool value,int index)
     {
         if(value)
@@ -65,5 +101,13 @@ public class SoundManager : MonoBehaviour
     public AudioSource getBg()
     {
         return myBackgroundSource;
+    }
+    public AudioSource getDoor()
+    {
+        return doorSource;
+    }
+    public AudioSource getSliding()
+    {
+        return slidingSource;
     }
 }
