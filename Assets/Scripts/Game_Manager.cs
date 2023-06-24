@@ -12,6 +12,8 @@ public class Game_Manager : MonoBehaviour
     public Talk_Manager talkManager;                        // 스크립트 참조
     public GameObject talkPanel;
     public GameObject selectPanel;
+    public GameObject selectPanel2;
+    public GameObject selectPanel3;
     public Text talkText;
     public Image portraitImg;                   // 초상화
     public Quest_Manager questManager;
@@ -66,7 +68,7 @@ public class Game_Manager : MonoBehaviour
             talkText.text = talkData;
             portraitImg.color = new Color(1, 1, 1, 0);
         }
-        if (talkData == "quest대화 확인2:1" || talkData == "다시 시도quest대화 확인2:1") // 대화 내용에 따라 조건을 변경.
+        if (talkData == "우울? [나는 네가 만들어 주는 간식을 좋아했어. 둘중 무엇을 더 좋아했었지?]:3" || talkData == "우울? [아니, 다시 처음 문제부터 다시 생각해봐 내가 좋아하는 간식은?]:3") // 대화 내용에 따라 조건을 변경.
         {
             selectPanel.SetActive(true);
         }
@@ -74,7 +76,23 @@ public class Game_Manager : MonoBehaviour
         {
             selectPanel.SetActive(false);
         }
-        if(talkData == "확인해볼까?:0")
+        if(talkData == "우울? [이것은 뭐일까?]:3")
+        {
+            selectPanel2.SetActive(true);
+        }
+        else
+        {
+            selectPanel2.SetActive(false);
+        }
+        if(talkData == "우울? [네가 준 수많은 인형들 중 유독 한 인형을 좋아했는데, 무슨 인형이지?]:3")
+        {
+            selectPanel3.SetActive(true);
+        }
+        else
+        {
+            selectPanel3.SetActive(false);
+        }
+        if (talkData == "확인해볼까?:0")
         {
             Bed_Event.instance.actionSwitch = 0;
         }
@@ -88,7 +106,7 @@ public class Game_Manager : MonoBehaviour
             InnerRoom_Rabbit.instance.keycheck = true;
             ChangeBackgroundColor(newColor);
         }
-        if(talkData== "아이템 올려두었따.")
+        if(talkData== "개껌을 올려두었다.")
         {
             Boss_EventController.instance.keycheck_1 = true;
             Boss_EventController.instance.patternHide();
@@ -96,13 +114,20 @@ public class Game_Manager : MonoBehaviour
             Boss_EventController.instance.bossActivate.SetActive(true);
             Boss_EventController.instance.bosshide.SetActive(false);
         }
-        else if (talkData == "아이템 올려두었따. 2")
+        else if (talkData == "오리 인형을 올려두었다.")
         {
             Boss_EventController.instance.keycheck_2 = true;
             ChangeBackgroundColor(newColor2);
             Boss_EventController.instance.bossPatternhide2.SetActive(false);
-            //Boss_EventController.instance.bossActivate.SetActive(true);
-            //Boss_EventController.instance.bosshide.SetActive(false);
+            Boss_EventController.instance.bossActivate2.SetActive(true);
+            Boss_EventController.instance.bosshide2.SetActive(false);
+        }
+
+        if(talkData == "토끼 인형을 올려두었다.")
+        {
+            Boss_EventController.instance.keycheck_3 = true;
+            Boss_EventController.instance.White.SetActive(true);
+            Boss_EventController.instance.getout.SetActive(true);
         }
 
 
