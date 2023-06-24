@@ -10,6 +10,12 @@ public class InnerRoom_Torch : MonoBehaviour
     [SerializeField] private string triggerTag = "Player"; // Trigger를 발생시키는 오브젝트의 태그
     public GameObject objectToDeAtivate;    // 비활성화 오브젝트
 
+    SoundManager soundManager;
+
+    private void Start()
+    {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -19,6 +25,7 @@ public class InnerRoom_Torch : MonoBehaviour
             objectToActivate.SetActive(true);
             objectToActivate2.SetActive(true);
             objectToDeAtivate.SetActive(false);
+            soundManager.setSource("torch");
 
         }
     }

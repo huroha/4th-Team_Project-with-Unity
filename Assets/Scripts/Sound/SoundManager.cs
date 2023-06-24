@@ -13,6 +13,10 @@ public class SoundManager : MonoBehaviour
     // 욕실 사운드 관련
     public AudioClip slidingSound;
     AudioSource slidingSource;
+    // 안방 사운드 관련
+    public GameObject innerObj;
+    public AudioClip[] innerSound = new AudioClip[2]; // 0은 촛불 , 1은 이불 들썩들썩
+    AudioSource innerSource;
     // 기본적인 시스템 관련
     public GameObject door;
     public AudioClip doorSound;
@@ -53,6 +57,22 @@ public class SoundManager : MonoBehaviour
             backgroundSource.loop = true;
             backgroundSource.mute = false;
             backgroundSource.Play();
+        }
+        else if(name == "torch")
+        {
+            innerSource = innerObj.GetComponent<AudioSource>();
+            innerSource.clip = innerSound[0];
+            innerSource.loop = false;
+            innerSource.mute = false;
+            innerSource.Play();
+        }
+        else if (name == "ebul")
+        {
+            innerSource = innerObj.GetComponent<AudioSource>();
+            innerSource.clip = innerSound[1];
+            innerSource.loop = false;
+            innerSource.mute = false;
+            innerSource.Play();
         }
 
     }
