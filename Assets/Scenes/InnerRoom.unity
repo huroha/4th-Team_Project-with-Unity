@@ -6980,8 +6980,8 @@ MonoBehaviour:
   talkManager: {fileID: 58970551}
   talkPanel: {fileID: 1738853594}
   selectPanel: {fileID: 2056379919}
-  selectPanel2: {fileID: 0}
-  selectPanel3: {fileID: 0}
+  selectPanel2: {fileID: 2056379919}
+  selectPanel3: {fileID: 2056379919}
   talkText: {fileID: 713366600}
   portraitImg: {fileID: 840696816}
   questManager: {fileID: 1965462582}
@@ -11296,6 +11296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ebutton: {fileID: 448899256}
   ebutton2: {fileID: 158873510}
+  count: 0
 --- !u!1 &2090084790
 GameObject:
   m_ObjectHideFlags: 0

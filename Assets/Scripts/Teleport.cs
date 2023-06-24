@@ -15,7 +15,7 @@ public class Teleport : MonoBehaviour
     {
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         scene = SceneManager.GetActiveScene();
-        if (scene.name != "startRoom")
+        if (scene.name != "startRoom" && scene.name != "Ending")
         {
             isSceneMoved = true;
             soundManager.setSource("door");
@@ -50,7 +50,14 @@ public class Teleport : MonoBehaviour
         {
             SceneManager.LoadScene("Yard");
         }
-
+        else if (SceneName == "Ending")
+        {
+            SceneManager.LoadScene("Ending");
+        }
+        else if(SceneName == "Title")
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 
     public bool getSceneMoveCheck()

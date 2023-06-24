@@ -32,7 +32,10 @@ public class ButtonManager : MonoBehaviour
         optionUI.SetActive(false);
         
     }
-
+    public void OnGoToTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
     public void OnEscapeButton()
     {
     #if UNITY_EDITOR

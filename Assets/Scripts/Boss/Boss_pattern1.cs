@@ -15,6 +15,8 @@ public class Boss_pattern1: MonoBehaviour
     public int clear_count = 0;
     private bool check = false;
     private bool check_once = true;
+
+    SoundManager soundManager;
     IEnumerator ActivateObject1()
     {
         while (true)
@@ -53,6 +55,8 @@ public class Boss_pattern1: MonoBehaviour
 
     private void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.setSource("rain");
         StartCoroutine(ActivateObject1());
         StartCoroutine(ActivateObject2());
     }
@@ -80,6 +84,7 @@ public class Boss_pattern1: MonoBehaviour
         }
         if(clear_count == 2)
         {
+            soundManager.getCh().Stop();
             object1.SetActive(false);
             object2.SetActive(false);
             AltarObj.SetActive(true);

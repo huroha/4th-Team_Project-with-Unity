@@ -12,6 +12,7 @@ public class Bed_Event : MonoBehaviour
     private bool routinecheck = false;
     public int actionSwitch = 1;
     public static Bed_Event instance;
+    SoundManager soundManager;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class Bed_Event : MonoBehaviour
     }
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         for (int i = 0; i < objects.Length; i++)
         {
             objects[i].SetActive(false);
@@ -45,6 +47,7 @@ public class Bed_Event : MonoBehaviour
         {
             objects[currentIndex].SetActive(true);
             yield return new WaitForSeconds(activeDuration);
+            soundManager.setSource("ebul");
             objects[currentIndex].SetActive(false);
             currentIndex++;
 

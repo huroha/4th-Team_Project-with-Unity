@@ -6,8 +6,8 @@ public class AI_DestroyCheck : MonoBehaviour
 {
     public GameObject objectToActivate;
     public GameObject Clear;
-    
-    
+
+    SoundManager soundManager;
 
     public static AI_DestroyCheck instance;
     private void Awake()
@@ -16,6 +16,7 @@ public class AI_DestroyCheck : MonoBehaviour
         {
             AI_DestroyCheck.instance = this;
         }
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,7 +28,7 @@ public class AI_DestroyCheck : MonoBehaviour
             Destroy(other.gameObject);
             objectToActivate.SetActive(true);
             PlayerActor.instance.PressEKey();
-            
+            soundManager.getCh().Stop();
         }
     }
 }
