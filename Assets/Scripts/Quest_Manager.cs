@@ -22,7 +22,7 @@ public class Quest_Manager : MonoBehaviour
 
     void GenerateData()
     {
-        questList.Add(10, new QuestData("첫번째 퀘스트", new int[] { 1000,2000 }));
+        questList.Add(10, new QuestData("첫번째 퀘스트", new int[] { 1000,3000 }));
         questList.Add(20, new QuestData("두번째 퀘스트", new int[] { 5000,2000 }));
         questList.Add(30, new QuestData("마무리", new int[] { 5000, 2000 }));
 

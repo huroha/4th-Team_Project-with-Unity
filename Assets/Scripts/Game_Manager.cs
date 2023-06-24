@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
+
+    public Camera mainCamera;   // 카메라 접근
+    public Color newColor;
     public Talk_Manager talkManager;                        // 스크립트 참조
     public GameObject talkPanel;
     public GameObject selectPanel;
@@ -14,6 +17,14 @@ public class Game_Manager : MonoBehaviour
     public GameObject scanObject;
     public bool isAction;
     public int talkIndex;
+
+   
+    
+  
+    public void ChangeBackgroundColor(Color newColor)
+    {
+        mainCamera.backgroundColor = newColor;
+    }
     public void Action(GameObject scanObj)
     {
         isAction = true;
@@ -74,11 +85,15 @@ public class Game_Manager : MonoBehaviour
         if(talkData == "토끼 인형을 발견했다.")
         {
             InnerRoom_Rabbit.instance.keycheck = true;
+            ChangeBackgroundColor(newColor);
         }
         if(talkData== "아이템 올려두었따.")
         {
             Boss_EventController.instance.keycheck_1 = true;
-            AI_DestroyCheck.instance.Clear.SetActive(false);
+            Boss_EventController.instance.patternHide();
+            ChangeBackgroundColor(newColor);
+            Boss_EventController.instance.bossActivate.SetActive(true);
+            Boss_EventController.instance.bosshide.SetActive(false);
         }
       
 
