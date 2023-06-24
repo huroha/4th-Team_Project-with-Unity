@@ -28,8 +28,6 @@ public class Inventory : MonoBehaviour
     public bool isGetInnerRoomItem;
     public bool isGetKitchenItem;
     public bool isGetLetter;
-    // 이펙트 처리
-    public GameObject effectObj;
     void Start()
     {
         Debug.Log("============== 인벤토리 시작 ================");
@@ -100,7 +98,6 @@ public class Inventory : MonoBehaviour
                         myData.addKeyCount(); // key 개수 1 증가
                         myText[keyIndex].text = myData.getKeyCount().ToString();
                         saveInvenText(keyIndex);
-                        effectObj.SetActive(false);
                     }
                     break;
                 case "isDuck": // 욕실 - 오리인형
