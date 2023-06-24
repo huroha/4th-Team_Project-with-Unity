@@ -13,6 +13,14 @@ public class SoundManager : MonoBehaviour
     // 욕실 사운드 관련
     public AudioClip slidingSound;
     AudioSource slidingSource;
+    // 안방 사운드 관련
+    public GameObject innerObj;
+    public AudioClip[] innerSound = new AudioClip[2]; // 0은 촛불 , 1은 이불 들썩들썩
+    AudioSource innerSource;
+    // 보스 사운드 관리
+    public GameObject bossObj;
+    public AudioClip[] bossSound = new AudioClip[2]; // 0은 체이싱 , 1은 빗소리 
+    AudioSource bossSource;
     // 기본적인 시스템 관련
     public GameObject door;
     public AudioClip doorSound;
@@ -25,28 +33,28 @@ public class SoundManager : MonoBehaviour
     {
         setSource("background");
     }
-// Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void setSource(string name)
     {
-        if(name == "door")
+        if (name == "door")
         {
             doorSource = door.GetComponent<AudioSource>();
             doorSource.clip = doorSound;
             doorSource.loop = false;
             doorSource.mute = false;
         }
-        else if(name == "sliding")
+        else if (name == "sliding")
         {
             slidingSource = GetComponent<AudioSource>();
             slidingSource.clip = slidingSound;
             slidingSource.loop = false;
             slidingSource.mute = false;
         }
-        else if(name == "background")
+        else if (name == "background")
         {
             backgroundSource = GameObject.Find("BGM").GetComponent<AudioSource>();
             backgroundSource.clip = backgroundSound;
@@ -54,11 +62,43 @@ public class SoundManager : MonoBehaviour
             backgroundSource.mute = false;
             backgroundSource.Play();
         }
+        else if (name == "torch")
+        {
+            innerSource = innerObj.GetComponent<AudioSource>();
+            innerSource.clip = innerSound[0];
+            innerSource.loop = false;
+            innerSource.mute = false;
+            innerSource.Play();
+        }
+        else if (name == "ebul")
+        {
+            innerSource = innerObj.GetComponent<AudioSource>();
+            innerSource.clip = innerSound[1];
+            innerSource.loop = false;
+            innerSource.mute = false;
+            innerSource.Play();
+        }
+        else if (name == "chase")
+        {
+            bossSource = bossObj.GetComponent<AudioSource>();
+            bossSource.clip = bossSound[0];
+            bossSource.loop = true;
+            bossSource.mute = false;
+            bossSource.Play();
+        }
+        else if (name == "rain")
+        {
+            bossSource = bossObj.GetComponent<AudioSource>();
+            bossSource.clip = bossSound[1];
+            bossSource.loop = true;
+            bossSource.mute = false;
+            bossSource.Play();
+        }
 
     }
-    public void setAudioSource(bool value,int index)
+    public void setAudioSource(bool value, int index)
     {
-        if(value)
+        if (value)
         {
             if (index == 0) // cook
             {
@@ -67,7 +107,7 @@ public class SoundManager : MonoBehaviour
                 myAudioSource.loop = false;
                 myAudioSource.mute = false;
             }
-            else if(index == 1) // oven
+            else if (index == 1) // oven
             {
                 myAudioSource = cookAndOven[1].GetComponent<AudioSource>();
                 myAudioSource.clip = CookingEffectSounds[1];
@@ -77,14 +117,14 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            if(index == 0)
+            if (index == 0)
             {
                 myBackgroundSource = cookAndOven[0].GetComponent<AudioSource>();
                 myBackgroundSource.clip = CookingBackgroundSounds[0];
                 myBackgroundSource.loop = true;
                 myBackgroundSource.mute = false;
             }
-            else if(index == 1)
+            else if (index == 1)
             {
                 myBackgroundSource = cookAndOven[1].GetComponent<AudioSource>();
                 myBackgroundSource.clip = CookingBackgroundSounds[1];
@@ -109,5 +149,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource getSliding()
     {
         return slidingSource;
+    }
+    public AudioSource getCh()
+    {
+        return bossSource;
     }
 }

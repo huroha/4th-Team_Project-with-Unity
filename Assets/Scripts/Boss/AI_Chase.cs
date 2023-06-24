@@ -10,8 +10,14 @@ public class AI_Chase : MonoBehaviour
     public GameObject spirit;
     public Transform spiritPos;
     private float distance;
+    SoundManager soundManager;
 
-  
+    private void Start()
+    {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.setSource("chase");
+    }
+
     // Update is called once per frame
     void Update()
     {

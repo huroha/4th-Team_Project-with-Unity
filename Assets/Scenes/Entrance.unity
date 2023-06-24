@@ -2209,6 +2209,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   slidingSound: {fileID: 0}
+  innerObj: {fileID: 0}
+  innerSound:
+  - {fileID: 0}
+  - {fileID: 0}
+  bossObj: {fileID: 0}
+  bossSound:
+  - {fileID: 0}
+  - {fileID: 0}
   door: {fileID: 2070065865}
   doorSound: {fileID: 8300000, guid: 8a1740adad0d79d4bb6f30a884652b2c, type: 3}
   backgroundSound: {fileID: 8300000, guid: 159df810487cc034bafb9f6c6579c890, type: 3}
@@ -3909,7 +3917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ebutton: {fileID: 1887975706}
   ebutton2: {fileID: 1740627396}
-  ebutton3: {fileID: 181143653}
+  count: 0
 --- !u!1 &1538952549
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,6 +4243,8 @@ MonoBehaviour:
   talkManager: {fileID: 126713594}
   talkPanel: {fileID: 1809434976}
   selectPanel: {fileID: 1512598468}
+  selectPanel2: {fileID: 1512598468}
+  selectPanel3: {fileID: 1512598468}
   talkText: {fileID: 765177687}
   portraitImg: {fileID: 1727410971}
   questManager: {fileID: 1538952550}
