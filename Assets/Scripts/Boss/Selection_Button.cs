@@ -7,34 +7,46 @@ public class Selection_Button : MonoBehaviour
 {
     public Button ebutton;
     public Button ebutton2;
-    public Button ebutton3;
 
- 
+    public int count = 0;
+    public static Selection_Button instance;
     private void Start()
     {
         ebutton.onClick.AddListener(keyAction_1);
         ebutton2.onClick.AddListener(keyAction_2);
-        ebutton3.onClick.AddListener(keyAction_3);
     }
 
-
+    private void Awake()
+    {
+        if (Selection_Button.instance == null)
+        {
+            Selection_Button.instance = this;
+        }
+    }
 
     public void keyAction_1()
     {
-         Debug.Log("1번 눌림");
+         Debug.Log("정답");
          PlayerActor.instance.PressEKey();
-         Quest_Manager.instance.NextQuest();
+        if(Quest_Manager.instance.questId != 20)
+        {
+            Quest_Manager.instance.NextQuest();
+        }
+        else
+        {
+            Quest_Manager.instance.NextQuest2();
+        }
+        
     }
     public void keyAction_2()
     {
-        Debug.Log("2번 눌림");
+        Debug.Log("오답");
         PlayerActor.instance.PressEKey();
+
         Quest_Manager.instance.PrevQuest();
+        count = 0;
+        count++;
+
     }
-    public void keyAction_3()
-    {
-        Debug.Log("3번 눌림");
-        PlayerActor.instance.PressEKey();
-        Quest_Manager.instance.PrevQuest();
-    }
+
 }

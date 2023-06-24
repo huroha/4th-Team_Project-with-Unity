@@ -22,17 +22,22 @@ public class Quest_Manager : MonoBehaviour
 
     void GenerateData()
     {
-        questList.Add(10, new QuestData("첫번째 퀘스트", new int[] { 1000,3000 }));
-        questList.Add(20, new QuestData("두번째 퀘스트", new int[] { 5000,2000 }));
+        questList.Add(0, new QuestData("첫번째 퀘스트", new int[] { 1000,3000 }));
+        questList.Add(10, new QuestData("두번째 퀘스트", new int[] { 2000,3000 }));
+
+        questList.Add(20, new QuestData("마무리", new int[] { 5000, 2000 }));
         questList.Add(30, new QuestData("마무리", new int[] { 5000, 2000 }));
+        questList.Add(40, new QuestData("마무리", new int[] { 5000, 2000 }));
+        questList.Add(50, new QuestData("마무리", new int[] { 5000, 2000 }));
 
-        questList.Add(120, new QuestData("퀘스트 확인용", new int[] { 5000, 2000 }));
+        questList.Add(120, new QuestData("퀘스트 확인용", new int[] { 3000, 2000 }));
+        questList.Add(130, new QuestData("퀘스트 확인용", new int[] { 3000, 2000 }));
 
 
-        questList.Add(40, new QuestData("침대확인1", new int[] { 35400, 35500 }));
-        questList.Add(50, new QuestData("침대확인2", new int[] { 35200, 35300 }));
-        questList.Add(60, new QuestData("침대확인3", new int[] { 35600, 35100 }));
-        questList.Add(70, new QuestData("침대확인 끝", new int[] { 35600, 30000 }));
+        questList.Add(60, new QuestData("침대확인1", new int[] { 35400, 35500 }));
+        questList.Add(70, new QuestData("침대확인2", new int[] { 35200, 35300 }));
+        questList.Add(80, new QuestData("침대확인3", new int[] { 35600, 35100 }));
+        questList.Add(90, new QuestData("침대확인 끝", new int[] { 35600, 30000 }));
     }
 
     public int GetQuestTalkIndex(int id)                //npc id 받고 퀘스트 번호 반환
@@ -55,14 +60,35 @@ public class Quest_Manager : MonoBehaviour
     {
         if (questId > 100)
         {
-            questId = 20;
+            questId = 10;
+            if(Selection_Button.instance.count != 0)
+            {
+                questId = 20;
+                questActionIndex = 0;
+            }
         }
-        questId += 10;
-        questActionIndex = 0;
+        if(questId != 20)
+        {
+            questId += 10;
+            questActionIndex = 0;
+        }
+
+    }
+    public void NextQuest2()
+    {
+
+          questId += 10;
+          questActionIndex = 0;
+
     }
     public void PrevQuest()
     {
         questId = 120;
+        questActionIndex = 0;
+    }
+    public void PrevQuest2()
+    {
+        questId = 130;
         questActionIndex = 0;
     }
     public void NoneQuest()

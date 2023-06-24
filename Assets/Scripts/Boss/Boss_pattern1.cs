@@ -24,7 +24,7 @@ public class Boss_pattern1: MonoBehaviour
             zone_object.SetActive(false);
             zone_object2.SetActive(false);
             check_once = true;
-            yield return new WaitForSeconds(6f);
+            yield return new WaitForSeconds(4f);
             object1.SetActive(true);
             if(clear_count == 0)
             {
@@ -34,7 +34,7 @@ public class Boss_pattern1: MonoBehaviour
             {
                 zone_object2.SetActive(true);
             }
-            yield return new WaitForSeconds(9f);
+            yield return new WaitForSeconds(6f);
             
         }
     }
@@ -44,9 +44,9 @@ public class Boss_pattern1: MonoBehaviour
         while (true)
         {
             object2.SetActive(false);
-            yield return new WaitForSeconds(12f);
+            yield return new WaitForSeconds(8f);
             object2.SetActive(true);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             
         }
     }
