@@ -6,6 +6,8 @@ public class AI_DestroyCheck : MonoBehaviour
 {
     public GameObject objectToActivate;
     public GameObject Clear;
+    
+    
 
     public static AI_DestroyCheck instance;
     private void Awake()

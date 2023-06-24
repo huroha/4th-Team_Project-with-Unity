@@ -10,6 +10,7 @@ public class AI_Chase : MonoBehaviour
     public GameObject spirit;
     public Transform spiritPos;
     private float distance;
+
   
     // Update is called once per frame
     void Update()
@@ -29,9 +30,8 @@ public class AI_Chase : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("플레이어 충돌 확인");
-            Destroy(spirit);
             Instantiate(spirit, spiritPos.transform.position, spiritPos.transform.rotation);
-
+            Destroy(spirit);
         }
     }
 

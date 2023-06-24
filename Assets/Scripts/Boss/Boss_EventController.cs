@@ -5,10 +5,12 @@ using UnityEngine;
 public class Boss_EventController : MonoBehaviour
 {
     public GameObject bossPattern1;
+    public GameObject bossPatternhide;
     public GameObject key1;
-    public GameObject StunObj;
 
-    public bool stuncheck = false;
+    public GameObject bossActivate;
+    public GameObject bosshide;
+    
     public bool keycheck_1 = false;
     public static Boss_EventController instance;
 
@@ -34,11 +36,12 @@ public class Boss_EventController : MonoBehaviour
             keycheck_1 = false;
         }
 
-        if (stuncheck)
-        {
-            StunObj.SetActive(true);
-        }
+     
         
     }
-
+    public void patternHide()
+    {
+        Debug.Log("½ÇÇè");
+        bossPatternhide.SetActive(false);
+    }
 }
