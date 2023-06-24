@@ -2256,6 +2256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0}
+  newColor2: {r: 0, g: 0, b: 0, a: 0}
   talkManager: {fileID: 2100434275}
   talkPanel: {fileID: 935103153}
   selectPanel: {fileID: 541151293}
@@ -4110,7 +4111,7 @@ AudioSource:
   m_GameObject: {fileID: 778708797}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -421542653112663950, guid: 35e7ee990a6fee546948be204e01d219, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4562,7 +4563,7 @@ MonoBehaviour:
   slidingSound: {fileID: 8300000, guid: 2b0645cb88ab403448e7d243b6993f5e, type: 3}
   door: {fileID: 1979663978}
   doorSound: {fileID: 8300000, guid: 8a1740adad0d79d4bb6f30a884652b2c, type: 3}
-  backgroundSound: {fileID: 8300000, guid: 159df810487cc034bafb9f6c6579c890, type: 3}
+  backgroundSound: {fileID: 8300000, guid: 28c1bc0821b409547a139e73e9cf9c4c, type: 3}
 --- !u!4 &863278043
 Transform:
   m_ObjectHideFlags: 0
@@ -4587,7 +4588,7 @@ AudioSource:
   m_GameObject: {fileID: 863278041}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -421542653112663950, guid: 35e7ee990a6fee546948be204e01d219, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -6177,7 +6178,7 @@ AudioSource:
   m_GameObject: {fileID: 1064827571}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2663103470124203689, guid: 35e7ee990a6fee546948be204e01d219, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -11257,7 +11258,7 @@ AudioSource:
   m_GameObject: {fileID: 1979663978}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -421542653112663950, guid: 35e7ee990a6fee546948be204e01d219, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
