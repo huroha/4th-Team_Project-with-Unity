@@ -21,8 +21,9 @@ public class Talk_Manager : MonoBehaviour
         // NPC : 1000 번대
         // 사물 : 100 번대
 
-        talkData.Add(1000, new string[] { "1번째 대사:1", "2번째 대사:2" });
-        talkData.Add(2000, new string[] { "1번째 대사:0", "2번째 대사:1" });
+        talkData.Add(1000, new string[] { "1000번 대사:1", "2번째 대사:2" });
+        talkData.Add(2000, new string[] { "2000번 대사:0", "2번째 대사:1" });
+        talkData.Add(3000, new string[] { "3000번 대사:0", "2번째 대사:1" });
 
         talkData.Add(100, new string[] { "carpet" });
         talkData.Add(200, new string[] { "아이템이 부족한거 같다. 퍼즐을 풀고 아이템을 모아오자" });
@@ -60,9 +61,13 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(0 + 40000, new string[] { "중앙에 무언가가 있어...:1", "확인해보자:0" });
         talkData.Add(0 + 41000, new string[] { "제단이 나왔어...:0" });
         talkData.Add(0 + 40100, new string[] { "아이템 올려두었따." });
+
+        talkData.Add(0 + 42100, new string[] { "성공했어.:0" });
         // Boss quest data  1000번대 활용
 
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
+
+        talkData.Add(11 + 3000, new string[] { "패턴 2 시작전 스크립트 대화:0", "패턴2 시작전 스크립트 대화2:1" });
 
         talkData.Add(11 + 2000, new string[] { "quest대화 확인1:0", "quest대화 확인2:1" });
         talkData.Add(30 + 2000, new string[] { "선택지성공1:0", "선택지성공2:1" });
@@ -75,6 +80,9 @@ public class Talk_Manager : MonoBehaviour
 
         portraitData.Add(2000 + 0, portraitArr[4]);
         portraitData.Add(2000 + 1, portraitArr[5]);
+
+        portraitData.Add(3000 + 0, portraitArr[0]);
+        portraitData.Add(3000 + 1, portraitArr[1]);
 
         // InnerRoom 초상화
         portraitData.Add(30000 + 1, portraitArr[1]);         // 진입 혼잣말
@@ -95,6 +103,8 @@ public class Talk_Manager : MonoBehaviour
         portraitData.Add(40000 + 0, portraitArr[0]);
         portraitData.Add(40000 + 1, portraitArr[1]);
         portraitData.Add(41000 + 0, portraitArr[0]);
+
+        portraitData.Add(42100 + 0, portraitArr[0]);        // 패턴2
 
 
 

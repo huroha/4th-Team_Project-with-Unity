@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45e3b37c0c3c8a4abb13a6194570ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2000
+  id: 3000
   isNpc: 1
   isUsed: 0
 --- !u!95 &258077373
@@ -2581,7 +2581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674039288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 3.16, z: 0.20381713}
+  m_LocalPosition: {x: -2.74, y: 2.81, z: 0.20381713}
   m_LocalScale: {x: 2.4375, y: 0.3625, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4159,10 +4159,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossPattern1: {fileID: 1485556680}
+  bossPattern2: {fileID: 1702002035}
   bossPatternhide: {fileID: 674039288}
   key1: {fileID: 905645391}
   bossActivate: {fileID: 258077369}
   bosshide: {fileID: 1802781934}
+  playerObj: {fileID: 0}
   keycheck_1: 0
 --- !u!4 &888150754
 Transform:
@@ -4433,7 +4435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &981428835
 Transform:
   m_ObjectHideFlags: 0
@@ -4684,6 +4686,26 @@ PrefabInstance:
     - target: {fileID: 7973088552669375831, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973088553234024133, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2744466
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973088553234024133, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3656671
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973088553234024133, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.030319512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973088553234024133, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.03514588
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973088553234024185, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7973088553234024186, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
       propertyPath: m_Color.b
@@ -6952,17 +6974,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1528476291}
-    m_ColliderPaths:
-    - - X: 5063291
-        Y: 376541
-      - X: -5063291
-        Y: 376541
-      - X: -5063291
-        Y: -969903
-      - X: 5063291
-        Y: -969903
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 0.5062998, y: -0.0969903}
@@ -7284,6 +7296,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1702002035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7973088552669375830, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
+  m_PrefabInstance: {fileID: 1069904595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1738853594
 GameObject:
   m_ObjectHideFlags: 0
@@ -9449,7 +9466,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090084790}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b85ce6de5b5206749be8dc9659b96484, type: 3}
   m_Name: 
@@ -9462,3 +9479,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7973088553234024185, guid: 5e0fbbc0e2818b747bbf11dc83d52354, type: 3}
   m_PrefabInstance: {fileID: 1069904595}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2132428751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132428746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45e3b37c0c3c8a4abb13a6194570ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 42100
+  isNpc: 1
+  isUsed: 0

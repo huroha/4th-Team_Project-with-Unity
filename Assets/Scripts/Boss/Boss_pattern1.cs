@@ -53,14 +53,13 @@ public class Boss_pattern1: MonoBehaviour
                 {
                     Debug.Log("safe zone clear");
                     check_once = false;
-                    
-                    
+                    PlayerActor.instance.PressEKey();
                 }
                 else
                 {
                     Debug.Log("safe zone fail");
                     check_once = false;
-                    
+                    PlayerActor.instance.PressEKey();
                 }
             }
           
