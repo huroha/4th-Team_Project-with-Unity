@@ -4399,7 +4399,7 @@ MonoBehaviour:
   slidingSound: {fileID: 0}
   door: {fileID: 1613094920}
   doorSound: {fileID: 8300000, guid: 8a1740adad0d79d4bb6f30a884652b2c, type: 3}
-  backgroundSound: {fileID: 8300000, guid: 159df810487cc034bafb9f6c6579c890, type: 3}
+  backgroundSound: {fileID: 8300000, guid: 28c1bc0821b409547a139e73e9cf9c4c, type: 3}
 --- !u!4 &834819305
 Transform:
   m_ObjectHideFlags: 0
