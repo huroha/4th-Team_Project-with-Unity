@@ -7,26 +7,39 @@ public class Boss_pattern1: MonoBehaviour
     public GameObject object1;
     public GameObject object2;
     public GameObject zone_object;
+    public GameObject zone_object2;
 
+    public GameObject AltarObj;
+
+
+    public int clear_count = 0;
     private bool check = false;
     private bool check_once = true;
-    private IEnumerator ActivateObject1()
+    IEnumerator ActivateObject1()
     {
         while (true)
         {
             check = false;
             object1.SetActive(false);
             zone_object.SetActive(false);
+            zone_object2.SetActive(false);
             check_once = true;
             yield return new WaitForSeconds(6f);
             object1.SetActive(true);
-            zone_object.SetActive(true);
+            if(clear_count == 0)
+            {
+                 zone_object.SetActive(true);
+            }
+            else if(clear_count == 1)
+            {
+                zone_object2.SetActive(true);
+            }
             yield return new WaitForSeconds(9f);
             
         }
     }
 
-    private IEnumerator ActivateObject2()
+    IEnumerator ActivateObject2()
     {
         while (true)
         {
@@ -53,16 +66,23 @@ public class Boss_pattern1: MonoBehaviour
                 {
                     Debug.Log("safe zone clear");
                     check_once = false;
+                    clear_count++;
                     PlayerActor.instance.PressEKey();
                 }
                 else
                 {
                     Debug.Log("safe zone fail");
                     check_once = false;
-                    PlayerActor.instance.PressEKey();
+                    //PlayerActor.instance.PressEKey();
                 }
             }
           
+        }
+        if(clear_count == 2)
+        {
+            object1.SetActive(false);
+            object2.SetActive(false);
+            AltarObj.SetActive(true);
         }
     }
 

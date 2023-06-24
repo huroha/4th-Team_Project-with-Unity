@@ -60,8 +60,10 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(0 + 40000, new string[] { "중앙에 무언가가 있어...:1", "확인해보자:0" });
         talkData.Add(0 + 41000, new string[] { "제단이 나왔어...:0" });
         talkData.Add(0 + 40100, new string[] { "아이템 올려두었따." });
+        talkData.Add(0 + 40200, new string[] { "아이템 올려두었따. 2" });
 
         talkData.Add(0 + 42100, new string[] { "성공했어.:0" });
+        talkData.Add(0 + 42200, new string[] { "제단이 나온거 같아.:0" });
         // Boss quest data  1000번대 활용
 
         talkData.Add(10 + 1000, new string[] { "quest 대화 1:0", "quest 대화 2:1" });
@@ -104,6 +106,8 @@ public class Talk_Manager : MonoBehaviour
         portraitData.Add(41000 + 0, portraitArr[0]);
 
         portraitData.Add(42100 + 0, portraitArr[0]);        // 패턴2
+        portraitData.Add(42200 + 0, portraitArr[0]);        
+
 
 
 
