@@ -26,6 +26,8 @@ public class Cook : MonoBehaviour
     public GameObject[] vegetables = new GameObject[4];
     //
     public GameObject player;
+    // 사운드를 위한 변수
+    public SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,8 @@ public class Cook : MonoBehaviour
         }
         noteInitPos = myNote.transform.position;
 
+        soundManager.setAudioSource(false, 0);
+        soundManager.getBg().Play();
     }
 
     // Update is called once per frame
@@ -96,16 +100,22 @@ public class Cook : MonoBehaviour
             {
                 isCorOb1 = true;
                 vegetables[0].SetActive(true);
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
             else if (transform.localPosition.x >= rangePosStartX[1].x && transform.localPosition.x <= rangePosEndX[1].x)
             {
                 isCorOb2 = true;
                 vegetables[1].SetActive(true);
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
             else if (transform.localPosition.x >= rangePosStartX[2].x && transform.localPosition.x <= rangePosEndX[2].x)
             {
                 isCorOb3 = true;
                 vegetables[2].SetActive(true);
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
         }
         else if (correctAreaOb[3].activeSelf == true && correctAreaOb[4].activeSelf == true && correctAreaOb[5].activeSelf == true && correctAreaOb[6].activeSelf == true) // 2 PHAZE
@@ -113,19 +123,27 @@ public class Cook : MonoBehaviour
             if (transform.localPosition.x >= rangePosStartX[3].x && transform.localPosition.x <= rangePosEndX[3].x)
             {
                 isCorOb1 = true;
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
             else if (transform.localPosition.x >= rangePosStartX[4].x && transform.localPosition.x <= rangePosEndX[4].x)
             {
                 isCorOb2 = true;
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
             else if (transform.localPosition.x >= rangePosStartX[5].x && transform.localPosition.x <= rangePosEndX[5].x)
             {
                 isCorOb3 = true;
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
             else if (transform.localPosition.x >= rangePosStartX[6].x && transform.localPosition.x <= rangePosEndX[6].x)
             {
                 isCorOb4 = true;
                 vegetables[3].SetActive(true);
+                soundManager.setAudioSource(true, 0);
+                soundManager.getAs().Play();
             }
 
             if (isCorOb1 == true && isCorOb2 == true && isCorOb3 == true && isCorOb4 == true)

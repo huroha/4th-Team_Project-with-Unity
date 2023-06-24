@@ -26,6 +26,8 @@ public class Oven : MonoBehaviour
     //
     public Cook myCook;
     public GameObject player;
+    // 사운드를 위한 변수
+    public SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,8 @@ public class Oven : MonoBehaviour
         }
         noteInitPos = myNote.transform.position;
 
+        soundManager.setAudioSource(false, 1);
+        soundManager.getBg().Play();
     }
 
     // Update is called once per frame
@@ -97,11 +101,15 @@ public class Oven : MonoBehaviour
                 {
                     ButtonController[0].SetActive(false);
                     ButtonController[1].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
                 else if(ButtonController[1].activeSelf == true)
                 {
                     ButtonController[1].SetActive(false);
                     ButtonController[0].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
                 
                 
@@ -113,11 +121,15 @@ public class Oven : MonoBehaviour
                 {
                     ButtonController[0].SetActive(false);
                     ButtonController[1].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
                 else if (ButtonController[1].activeSelf == true)
                 {
                     ButtonController[1].SetActive(false);
                     ButtonController[0].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
             }
             else if (transform.localPosition.x >= rangePosStartX[2].x && transform.localPosition.x <= rangePosEndX[2].x)
@@ -127,11 +139,15 @@ public class Oven : MonoBehaviour
                 {
                     ButtonController[0].SetActive(false);
                     ButtonController[1].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
                 else if (ButtonController[1].activeSelf == true)
                 {
                     ButtonController[1].SetActive(false);
                     ButtonController[0].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
             }
             else if (transform.localPosition.x >= rangePosStartX[3].x && transform.localPosition.x <= rangePosEndX[3].x)
@@ -141,11 +157,15 @@ public class Oven : MonoBehaviour
                 {
                     ButtonController[0].SetActive(false);
                     ButtonController[1].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
                 else if (ButtonController[1].activeSelf == true)
                 {
                     ButtonController[1].SetActive(false);
                     ButtonController[0].SetActive(true);
+                    soundManager.setAudioSource(true, 1);
+                    soundManager.getAs().Play();
                 }
             }
         }
