@@ -8,6 +8,7 @@ public class Game_Manager : MonoBehaviour
 
     public Camera mainCamera;   // 카메라 접근
     public Color newColor;
+    public Color newColor2;
     public Talk_Manager talkManager;                        // 스크립트 참조
     public GameObject talkPanel;
     public GameObject selectPanel;
@@ -95,7 +96,16 @@ public class Game_Manager : MonoBehaviour
             Boss_EventController.instance.bossActivate.SetActive(true);
             Boss_EventController.instance.bosshide.SetActive(false);
         }
-      
+        else if (talkData == "아이템 올려두었따. 2")
+        {
+            Boss_EventController.instance.keycheck_2 = true;
+            ChangeBackgroundColor(newColor2);
+            Boss_EventController.instance.bossPatternhide2.SetActive(false);
+            //Boss_EventController.instance.bossActivate.SetActive(true);
+            //Boss_EventController.instance.bosshide.SetActive(false);
+        }
+
+
 
         isAction = true;
         talkIndex++;
