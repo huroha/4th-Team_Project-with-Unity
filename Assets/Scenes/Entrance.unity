@@ -300,7 +300,7 @@ AudioSource:
   m_GameObject: {fileID: 104092677}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2663103470124203689, guid: 35e7ee990a6fee546948be204e01d219, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4132,6 +4132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0}
+  newColor2: {r: 0, g: 0, b: 0, a: 0}
   talkManager: {fileID: 126713594}
   talkPanel: {fileID: 1809434976}
   selectPanel: {fileID: 1512598468}
@@ -6026,7 +6027,7 @@ AudioSource:
   m_GameObject: {fileID: 2070065865}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -421542653112663950, guid: 35e7ee990a6fee546948be204e01d219, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
