@@ -4876,6 +4876,7 @@ MonoBehaviour:
   bosshide2: {fileID: 3265794}
   bossActivate3: {fileID: 1114115253}
   bosshide3: {fileID: 1414238605}
+  final_text: 0
   playerObj: {fileID: 0}
   playerObj2: {fileID: 0}
   keycheck_1: 0
@@ -6613,7 +6614,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.030193865, y: -0.45239896}
+  m_Offset: {x: -0.030193865, y: -0.11282337}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6624,7 +6625,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8617083, y: 1.3063279}
+  m_Size: {x: 0.8617083, y: 0.62717676}
   m_EdgeRadius: 0
 --- !u!114 &1114115255
 MonoBehaviour:

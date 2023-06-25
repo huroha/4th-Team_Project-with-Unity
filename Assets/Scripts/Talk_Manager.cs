@@ -25,15 +25,16 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(2000, new string[] { "2000번 대사:0", "2번째 대사:1" });
         talkData.Add(3000, new string[] { "우울? [어디한번 해봐...]:3", });
 
-        talkData.Add(100, new string[] { "carpet" });
+        talkData.Add(100, new string[] { "오래된 종이 상자같다.." });
         talkData.Add(200, new string[] { "아이템이 부족한거 같다. 퍼즐을 풀고 아이템을 모아오자" });       
         talkData.Add(300, new string[] { "움직이는 노트가 재료칸에 들어갔을 때 스페이스바를 눌러 재료를 담아보자!" });
         talkData.Add(400, new string[] { "가운데에 온도 조절 버튼을 눌러 온도를 맞춰보자!" });
-        talkData.Add(500, new string[] { "num4" });
+        talkData.Add(500, new string[] { "켜지지 않네.." });
         talkData.Add(600, new string[] { "열쇠를 획득했다!"});
+        talkData.Add(700, new string[] { "그냥 화분일 뿐이다." });
         // InnerRoom 전용 30000번대
 
-      
+
         talkData.Add(30000, new string[] { "여긴 너무 어두운걸.....:1", "불을 켤만한 게 있을까..?:0" });
         talkData.Add(100+30000, new string[] { "방이 밝아졌다." });
         talkData.Add(200 + 30000, new string[] { "침대에 무언가가...?:1","확인해볼까?:0" });
