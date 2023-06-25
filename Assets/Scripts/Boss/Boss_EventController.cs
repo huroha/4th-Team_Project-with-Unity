@@ -24,7 +24,7 @@ public class Boss_EventController : MonoBehaviour
 
     public GameObject bossActivate3;    // 마지막 강아지로.
     public GameObject bosshide3;
-
+    public bool final_text = false;
 
 
     public GameObject playerObj;        // 보스패턴 작동용
@@ -86,11 +86,10 @@ public class Boss_EventController : MonoBehaviour
             key3.SetActive(true);
             keycheck_3 = false;
         }
-        if(Quest_Manager.instance.questId == 40)
+        if(Quest_Manager.instance.questId == 40 && final_text)
         {
             bosshide3.SetActive(false);
             bossActivate3.SetActive(true);
-            last_altar.SetActive(true);
         }
 
 

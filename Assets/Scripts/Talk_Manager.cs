@@ -23,7 +23,7 @@ public class Talk_Manager : MonoBehaviour
 
         talkData.Add(100000, new string[] { "1000번 대사:1", "2번째 대사:2" });
         talkData.Add(2000, new string[] { "2000번 대사:0", "2번째 대사:1" });
-        talkData.Add(3000, new string[] { "3000번 대사:0", "2번째 대사:1" });
+        talkData.Add(3000, new string[] { "우울? [어디한번 해봐...]:3", });
 
         talkData.Add(100, new string[] { "carpet" });
         talkData.Add(200, new string[] { "아이템이 부족한거 같다. 퍼즐을 풀고 아이템을 모아오자" });       
