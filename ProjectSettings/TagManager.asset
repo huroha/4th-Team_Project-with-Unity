@@ -18,6 +18,7 @@ TagManager:
   - Talk
   - Oven
   - isLetter
+  - Obstacle
   layers:
   - Default
   - TransparentFX

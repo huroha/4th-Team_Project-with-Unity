@@ -195,11 +195,13 @@ public class PlayerActor : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(isSlide)
+
+        if (isSlide)
         {
             isSlide = false;
             StopSliding();
         }
+        
     }
     void OnSliding()
     {
@@ -212,6 +214,8 @@ public class PlayerActor : MonoBehaviour
 
     {
         CancelInvoke("OnSliding");
+        Debug.Log("스탑 슬라이딩");
+        Debug.Log(dir);
     }
 
     public GameObject getScanOb()

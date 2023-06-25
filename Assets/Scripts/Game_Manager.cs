@@ -131,7 +131,6 @@ public class Game_Manager : MonoBehaviour
         }
 
 
-
         isAction = true;
         talkIndex++;
     }

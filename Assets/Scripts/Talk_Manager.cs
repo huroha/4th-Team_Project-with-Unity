@@ -80,6 +80,10 @@ public class Talk_Manager : MonoBehaviour
         talkData.Add(30 + 2000, new string[] { "우울? [나는 내 애착인형을 물고 가서 이불 속에 숨어있는 걸 좋아했어.]:3", "우울? [네가 준 수많은 인형들 중 유독 한 인형을 좋아했는데, 무슨 인형이지?]:3" });
         talkData.Add(40 + 2000, new string[] { "우울? [네가 이겼어!]:3", "우울? [이제 현실로 돌아갈 수 있는 마지막 제단을 줄게.]:3","이제 전부 알겠어.....넌 하나지?:4","내가 예전처럼 다시 밖으로 나왔으면 좋겠어서... 편지를 보낸거야?:4","하나 [맞아, 유리! 네 말처럼 모든 건 네 잘못이 아니야.....]:3","하나 [전부 사고였어. 나를 이제 무서운 불행이 아닌]:3","하나 [다시 따뜻한 추억으로 기억해 줄 거지?]:3","하나 [난 영원히 네 마음 속에서 행복하게 존재할거야.]:3" });
         talkData.Add(100 + 2000, new string[] { "우울? [아니, 다시 처음 문제부터 다시 생각해봐 내가 좋아하는 간식은?]:3" });
+
+        // BathRoom 10000번대
+        talkData.Add(10000, new string[] { "욕조에서 무슨 소리가 들리는데..?:0","바닥이 미끌거리니 장애물을 이용해 욕조까지 가보자!:0" });
+        talkData.Add(100 + 10000, new string[] { "대왕오리 [꽥꽥! 내가 내는 소리를 순서대로 맞혀봐라 꽥꽥!]:4","키보드의 Z,X,C,V 를 눌러 오리가 내는 소리를 순서대로 내어보자!:4" });
         // 초상화 data
         portraitData.Add(1000 + 0,portraitArr[0]);
         portraitData.Add(1000 + 1, portraitArr[1]);
@@ -118,10 +122,12 @@ public class Talk_Manager : MonoBehaviour
         portraitData.Add(41000 + 0, portraitArr[0]);
 
         portraitData.Add(42100 + 0, portraitArr[0]);        // 패턴2
-        portraitData.Add(42200 + 0, portraitArr[0]);        
+        portraitData.Add(42200 + 0, portraitArr[0]);
 
 
-
+        // 욕실
+        portraitData.Add(10000 + 0, portraitArr[0]);
+        portraitData.Add(10100 + 4, portraitArr[4]);
 
 
     }

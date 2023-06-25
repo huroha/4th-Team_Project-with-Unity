@@ -26,6 +26,7 @@ public class Cook : MonoBehaviour
     public GameObject[] vegetables = new GameObject[4];
     //
     public GameObject player;
+ 
     // 이펙트
     public GameObject[] effect = new GameObject[2];
     // 사운드를 위한 변수
@@ -75,6 +76,8 @@ public class Cook : MonoBehaviour
             myData.GetComponent<ObjData>().setIsUsed();
             savePlayerData();
             player.GetComponent<PlayerActor>().speed = 3.8f;
+            effect[0].SetActive(false);
+            effect[1].SetActive(true);
         }
     }
     
