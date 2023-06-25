@@ -128,6 +128,12 @@ public class Game_Manager : MonoBehaviour
             Boss_EventController.instance.keycheck_3 = true;
             Boss_EventController.instance.White.SetActive(true);
             Boss_EventController.instance.getout.SetActive(true);
+            Boss_EventController.instance.final_text = true;
+
+        }
+        if(talkData == "하나 [난 영원히 네 마음 속에서 행복하게 존재할거야.]:3")
+        {
+            Boss_EventController.instance.last_altar.SetActive(true);
         }
 
 
