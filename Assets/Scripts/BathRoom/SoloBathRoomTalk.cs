@@ -58,7 +58,7 @@ public class SoloBathRoomTalk : MonoBehaviour
     {
         if(isTrigger)
         {
-            gameObject.transform.Translate(Vector3.up * 0.0001f);
+            gameObject.transform.Translate(Vector3.up * 0.0005f);
         }
     }
     public void DestoyThis()

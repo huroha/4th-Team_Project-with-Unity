@@ -4229,6 +4229,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 384004239a1bf6a438ed1d771daeaa3b, type: 3}
   keyOrder: 0000000000000000
   indexCount: 0
+  effect: {fileID: 8300000, guid: f58d9572782767a469324020aa31f365, type: 3}
 --- !u!4 &778708799
 Transform:
   m_ObjectHideFlags: 0
@@ -11044,7 +11045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918946939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.54, y: -5.34, z: 3.5024}
+  m_LocalPosition: {x: -1.532, y: -5.039, z: 3.5024}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:

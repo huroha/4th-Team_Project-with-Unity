@@ -17,6 +17,9 @@ public class BathRoom_Duck : MonoBehaviour
     // 키 입력 순서를 체크하는 배열
     public char[] keyOrder = new char[4];
     public int indexCount = 0;
+    // 효과음
+    public AudioClip effect;
+    AudioSource effectSource;
     // 인벤
     Inventory myInv;
     bool isVailid;
@@ -25,6 +28,7 @@ public class BathRoom_Duck : MonoBehaviour
     {
         duckSource = GetComponent<AudioSource>();
         trackSource = GetComponent<AudioSource>();
+        effectSource = GetComponent<AudioSource>();
         myInv = GameObject.Find("Inventory").GetComponent<Inventory>();
         // 트랙 넘버 정하기(한판에 한번)
         trackNumber = Random.Range(0, 3);
@@ -83,7 +87,8 @@ public class BathRoom_Duck : MonoBehaviour
                 indexCount++;
             }
         }
-        if (isVailid == false)
+        if (isVailid == false 
+            && keyOrder[0] != ' ' && keyOrder[1] != ' ' && keyOrder[2] != ' ' && keyOrder[3] != ' ')
         {
             orderCheck();
             initInputArray();
@@ -138,5 +143,9 @@ public class BathRoom_Duck : MonoBehaviour
                 keyOrder[i] = ' ';
             indexCount = 0;
         }
+        effectSource.clip = effect;
+        effectSource.loop = false;
+        effectSource.mute = false;
+        effectSource.Play();
     }
 }
